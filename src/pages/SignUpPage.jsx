@@ -183,7 +183,6 @@ const SignUpPage = () => {
                   Full Name
                 </label>
                 <div className="input-wrapper">
-                  <User size={20} className="input-icon" />
                   <input
                     type="text"
                     id="name"
@@ -203,7 +202,6 @@ const SignUpPage = () => {
                   Email Address
                 </label>
                 <div className="input-wrapper">
-                  <Mail size={20} className="input-icon" />
                   <input
                     type="email"
                     id="email"
@@ -223,7 +221,6 @@ const SignUpPage = () => {
                   Password
                 </label>
                 <div className="input-wrapper">
-                  <Lock size={20} className="input-icon" />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     id="password"
@@ -253,7 +250,6 @@ const SignUpPage = () => {
                   Confirm Password
                 </label>
                 <div className="input-wrapper">
-                  <Lock size={20} className="input-icon" />
                   <input
                     type={showConfirmPassword ? 'text' : 'password'}
                     id="confirmPassword"

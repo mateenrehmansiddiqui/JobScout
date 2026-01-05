@@ -107,7 +107,6 @@ const LoginPage = () => {
               <div className="form-group">
                 <label htmlFor="email" className="form-label">Email Address</label>
                 <div className="input-wrapper">
-                  <Mail size={20} className="input-icon" />
                   <input
                     type="email"
                     id="email"
@@ -127,7 +126,6 @@ const LoginPage = () => {
                   <Link to="/forgot-password" style={{fontSize: '13px'}} className="link-primary">Forgot password?</Link>
                 </div>
                 <div className="input-wrapper">
-                  <Lock size={20} className="input-icon" />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     id="password"
