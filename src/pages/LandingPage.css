@@ -1,0 +1,15 @@
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Page wrapper */
+.landing-page {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Ensure sections are properly spaced */
+section {
+  scroll-margin-top: 80px;
+}
