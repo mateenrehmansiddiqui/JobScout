@@ -1,5 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LandingPage from '../pages/LandingPage';
+import SignUpPage from '../pages/SignUpPage';
+import LoginPage from '../pages/LoginPage'; 
 
 export const router = createBrowserRouter([
   {
@@ -8,20 +10,10 @@ export const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: (
-      <div style={{ padding: '100px 20px', textAlign: 'center' }}>
-        <h1>Login Page</h1>
-        <p>Coming soon...</p>
-      </div>
-    ),
+    element: <LoginPage />,
   },
   {
     path: '/signup',
-    element: (
-      <div style={{ padding: '100px 20px', textAlign: 'center' }}>
-        <h1>Sign Up Page</h1>
-        <p>Coming soon...</p>
-      </div>
-    ),
+    element: <SignUpPage />,
   },
 ]);
