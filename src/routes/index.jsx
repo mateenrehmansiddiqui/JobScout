@@ -1,13 +1,20 @@
 import { createBrowserRouter } from 'react-router-dom';
+
+// Import all page components using relative paths for reliability
 import LandingPage from '../pages/LandingPage';
 import SignUpPage from '../pages/SignUpPage';
 import LoginPage from '../pages/LoginPage';
-import Onboarding from '@pages/Onboarding';
+import Onboarding from '../pages/Onboarding';
+import Dashboard from '../pages/Dashboard';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <LandingPage />,
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard />,
   },
   {
     path: '/login',
@@ -18,8 +25,7 @@ export const router = createBrowserRouter([
     element: <SignUpPage />,
   },
   {
-  path: '/onboarding',
-  element: <Onboarding />,
-}
-
+    path: '/onboarding',
+    element: <Onboarding />,
+  },
 ]);
