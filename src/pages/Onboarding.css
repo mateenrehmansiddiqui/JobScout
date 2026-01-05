@@ -1,0 +1,258 @@
+.onboarding-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f0f7ff 0%, #f9fafb 60%);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating background glow */
+.onboarding-page::before,
+.onboarding-page::after {
+  content: '';
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, #60a5fa 0%, transparent 70%);
+  opacity: 0.18;
+  animation: float 14s infinite alternate ease-in-out;
+}
+
+.onboarding-page::before {
+  top: -180px;
+  left: -180px;
+}
+
+.onboarding-page::after {
+  bottom: -200px;
+  right: -200px;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(60px);
+  }
+}
+
+/* Floating widgets */
+.floating-card {
+  position: absolute;
+  background: #ffffff;
+  padding: 10px 16px;
+  border-radius: 9999px;
+  font-size: 14px;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
+  animation: floatWidget 6s infinite ease-in-out;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.floating-card-1 {
+  top: 18%;
+  left: 6%;
+}
+
+.floating-card-2 {
+  bottom: 20%;
+  right: 6%;
+  animation-delay: 2s;
+}
+
+@keyframes floatWidget {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.onboarding-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.badge {
+  display: inline-block;
+  background-color: #e0edff;
+  color: #2563eb;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.onboarding-header h1 {
+  font-size: 34px;
+  color: #1f2937;
+}
+
+.onboarding-header p {
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+/* Progress */
+.onboarding-progress {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.onboarding-progress span {
+  width: 70px;
+  height: 6px;
+  background-color: #dbeafe;
+  border-radius: 9999px;
+  position: relative;
+  overflow: hidden;
+}
+
+.onboarding-progress .active-step::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  animation: progressPulse 1.6s infinite;
+}
+
+@keyframes progressPulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+/* Card */
+.onboarding-card {
+  background-color: #ffffff;
+  padding: 36px;
+  border-radius: 20px;
+  box-shadow: 0 30px 40px rgba(37, 99, 235, 0.15);
+  animation: slideUp 0.7s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 11px 14px;
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* Rows */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Choice cards */
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.choice-card {
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #dbeafe;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-size: 14px;
+}
+
+.choice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(37, 99, 235, 0.18);
+}
+
+.choice-card.active {
+  border-color: #2563eb;
+  background: linear-gradient(180deg, #eff6ff, #ffffff);
+  color: #2563eb;
+  font-weight: 600;
+}
+
+/* Upload */
+.upload-box {
+  border: 2px dashed #93c5fd;
+  border-radius: 16px;
+  padding: 26px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #f0f7ff;
+}
+
+.upload-box:hover {
+  background-color: #e0edff;
+  border-color: #2563eb;
+}
+
+/* Actions */
+.onboarding-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28px;
+}
+
+.skip-btn {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.skip-btn:hover {
+  text-decoration: underline;
+}
