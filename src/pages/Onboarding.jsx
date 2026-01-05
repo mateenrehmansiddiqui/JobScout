@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import Button from '@components/Button';
+import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
+import Button from '../components/Button'; // 2. Updated to relative path
 import './Onboarding.css';
 
 const Onboarding = () => {
+  const navigate = useNavigate(); // 3. Initialize the navigate function
+
   const [formData, setFormData] = useState({
     fullName: '',
     status: '',
@@ -23,8 +26,15 @@ const Onboarding = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Onboarding Data:', formData);
-    // You can handle API call or routing here
+    console.log('Onboarding Data Saved:', formData);
+    
+    // 4. Navigate to the Dashboard after form submission
+    navigate('/dashboard');
+  };
+
+  const handleSkip = () => {
+    // 5. Navigate to Dashboard even if they skip
+    navigate('/dashboard');
   };
 
   return (
@@ -38,7 +48,7 @@ const Onboarding = () => {
           </p>
         </div>
 
-        {/* Progress */}
+        {/* Progress Bar */}
         <div className="onboarding-progress">
           <span className="active-step" />
           <span />
@@ -160,7 +170,7 @@ const Onboarding = () => {
 
           {/* Actions */}
           <div className="onboarding-actions">
-            <button type="button" className="skip-btn">
+            <button type="button" className="skip-btn" onClick={handleSkip}>
               Skip for now
             </button>
             <Button type="submit" size="large">
