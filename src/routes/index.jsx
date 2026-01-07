@@ -6,6 +6,7 @@ import SignUpPage from '../pages/SignUpPage';
 import LoginPage from '../pages/LoginPage';
 import Onboarding from '../pages/Onboarding';
 import Dashboard from '../pages/Dashboard';
+import NewSessionPage from '../pages/NewSessionPage'; 
 
 export const router = createBrowserRouter([
   {
@@ -28,4 +29,8 @@ export const router = createBrowserRouter([
     path: '/onboarding',
     element: <Onboarding />,
   },
+  {
+    path: '/new-session',
+    element: <NewSessionPage />,
+  }
 ]);
