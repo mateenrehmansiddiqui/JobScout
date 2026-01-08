@@ -156,7 +156,7 @@ const NewSessionPage = () => {
               </div>
 
               <div className="input-group" style={{marginTop: '25px'}}>
-                {/* Minimalist text display without the blue background */}
+                {/* Minimalistic text display without the blue background */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                   <label style={{ fontWeight: '700', color: '#1e293b' }}>Number of Questions</label>
                   <span className="question-count-badge">{numQuestions} Questions</span>

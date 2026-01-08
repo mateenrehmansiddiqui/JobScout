@@ -6,7 +6,7 @@ import Button from '@components/Button';
 import { mockUser, mockSessions } from '@data/mockData';
 
 const Dashboard = () => {
-  const navigate = useNavigate(); // Added this line
+  const navigate = useNavigate(); // add this line
 
   return (
     <div className="dashboard-container">

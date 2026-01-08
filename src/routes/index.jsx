@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-// Import all page components using relative paths for reliability
+// importing all page components using relative paths for reliability
 import LandingPage from '../pages/LandingPage';
 import SignUpPage from '../pages/SignUpPage';
 import LoginPage from '../pages/LoginPage';
