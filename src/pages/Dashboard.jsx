@@ -1,13 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Added this
 import './Dashboard.css';
 import StatCard from '@components/StatCard';
 import Button from '@components/Button';
 import { mockUser, mockSessions } from '@data/mockData';
 
 const Dashboard = () => {
-  const navigate = useNavigate(); // add this line
-
   return (
     <div className="dashboard-container">
       {/* Welcome Header */}
@@ -17,13 +14,9 @@ const Dashboard = () => {
           <p>Your performance is up 12% this week. Keep it up!</p>
         </div>
         <div className="header-actions">
-          <Button 
-             variant="primary" 
-             size="large" 
-             onClick={() => navigate('/new-session')} // This now works
-          >
+           <Button variant="primary" size="large">
              Start New Interview
-          </Button>
+           </Button>
         </div>
       </header>
 
@@ -44,6 +37,7 @@ const Dashboard = () => {
               <span className="badge">AI Insights</span>
             </div>
             <div className="placeholder-chart">
+               {/* Note: Use a library like Chart.js or Recharts here in Phase 2 */}
                <div className="radar-placeholder">Skill Matrix Visualization</div>
             </div>
             <div className="alert-box">
