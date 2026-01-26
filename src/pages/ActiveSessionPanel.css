@@ -1,0 +1,26 @@
+.ps-page { height: 100vh; background: #f1f5f9; padding: 20px; overflow: hidden; }
+.ps-conference-grid { height: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; }
+
+.ps-main-stage { flex: 1; background: white; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column; }
+.ps-stage-header { padding: 20px 30px; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; }
+.ps-live-badge { background: #fef2f2; color: #dc2626; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 4px; border: 1px solid #fee2e2; margin-right: 12px; }
+.ps-info h1 { font-size: 18px; font-weight: 800; display: inline; }
+
+.ps-controls { display: flex; gap: 10px; }
+.ps-control-btn { width: 40px; height: 40px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; display: grid; place-items: center; color: #475569; cursor: pointer; }
+.ps-btn-end { background: #fef2f2; border-color: #fee2e2; color: #dc2626; }
+
+.ps-members-strip { padding: 20px 30px; display: flex; gap: 15px; background: #fafafa; border-bottom: 1px solid #f1f5f9; }
+.ps-member-card { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ps-member-vid { width: 80px; height: 50px; border-radius: 8px; color: white; display: grid; place-items: center; font-weight: 900; font-size: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.ps-member-card span { font-size: 11px; font-weight: 700; color: #64748b; }
+
+.ps-collab-area { flex: 1; display: flex; flex-direction: column; padding: 20px; }
+.ps-board-tabs { display: flex; gap: 5px; margin-bottom: 15px; }
+.ps-tab { padding: 8px 16px; border-radius: 8px; border: none; background: transparent; font-size: 13px; font-weight: 700; color: #64748b; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.ps-tab.active { background: #e0f2fe; color: #0369a1; }
+
+.ps-board-content { flex: 1; background: #f8fafc; border: 2px dashed #e2e8f0; border-radius: 16px; display: grid; place-items: center; }
+.ps-canvas-placeholder { text-align: center; color: #94a3b8; }
+.ps-canvas-placeholder p { margin: 15px 0; font-weight: 600; }
+.ps-btn-start { background: white; border: 1px solid #e2e8f0; padding: 10px 20px; border-radius: 12px; font-weight: 700; color: #0f172a; cursor: pointer; display: flex; align-items: center; gap: 8px; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
