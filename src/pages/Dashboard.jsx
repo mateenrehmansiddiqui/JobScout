@@ -1,180 +1,164 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { 
+  ChevronDown, LogOut, Settings, User, Play, Clock, 
+  BarChart2, Flame, Star, Trophy, Mic, AlertCircle, TrendingUp, Camera 
+} from 'lucide-react';
 import './Dashboard.css';
-import StatCard from '../components/StatCard';
-import Button from '../components/Button';
-import { mockUser, mockSessions } from '../data/mockData';
+import { mockUser } from '../data/mockData';
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
 
-  // ✅ Go to Session History page
-  const goToHistory = () => {
-    navigate('/session/history');
-  };
-
-  // ✅ Go to Session Results page with session meta passed via state
-  const goToSessionDetails = (session) => {
-    const sessionMeta = {
-      id: session.id,
-      dateTime: session.date,          // if you have full ISO later, replace this
-      role: session.role,
-      type: session.type || "HR",      // fallback if mock data doesn't have it
-      duration: session.duration || "—",
-      score: session.score,
-      percentile: session.percentile || null,
-      questionsAnswered: session.questionsAnswered || null,
-      totalQuestions: session.totalQuestions || null,
-    };
-
-    navigate('/session/results', {
-      state: { sessionMeta }
-    });
+  // Simulate AI feedback after recording
+  const handleRecordClick = () => {
+    setIsRecording(true);
+    setTimeout(() => {
+      setIsRecording(false);
+      setShowFeedback(true);
+    }, 3000);
   };
 
   return (
-    <div className="dashboard-container">
-      {/* Welcome Header */}
-      <header className="dashboard-header">
-        <div>
-          <h1>Hi {mockUser.name}, ready to practice?</h1>
-          <p>Your performance is up 12% this week. Keep it up!</p>
+    <div className="dashboard-wrapper">
+      {/* --- TOP HEADER (Restored to earlier style) --- */}
+      <nav className="top-header">
+        <div className="header-left">
+          <span className="logo" onClick={() => navigate('/')}>JobScout</span>
         </div>
 
-        <div className="header-actions">
-          {/* ✅ Optional but useful: quick History link in header */}
-          <button
-            onClick={goToHistory}
-            style={{
-              background: 'transparent',
-              border: '1px solid rgba(0,0,0,0.12)',
-              padding: '10px 14px',
-              borderRadius: '10px',
-              cursor: 'pointer',
-              fontWeight: 600,
-              marginRight: 10
-            }}
-          >
-            History
+        <div className="header-center">
+          <button className="nav-btn primary" onClick={() => navigate('/new-session')}>
+            <Play size={16} fill="currentColor" /> Start New Interview
           </button>
-
-          <Button
-            variant="primary"
-            size="large"
-            onClick={() => navigate('/new-session')}
-          >
-            Start New Interview
-          </Button>
-        </div>
-      </header>
-
-      {/* Stats Grid */}
-      <div className="stats-grid">
-        <StatCard label="Interviews" value={mockUser.stats.totalInterviews} icon="🎯" />
-        <StatCard label="Best Score" value={`${mockUser.stats.bestScore}%`} icon="⭐" />
-        <StatCard label="Current Streak" value={`${mockUser.stats.currentStreak} Days`} icon="🔥" />
-        <StatCard label="Percentile" value={`Top ${100 - mockUser.stats.percentileRank}%`} icon="📊" />
-      </div>
-
-      <div className="dashboard-main-content">
-        <div className="content-left">
-          <section className="chart-section">
-            <div className="section-header">
-              <h3>Skill Radar</h3>
-              <span className="badge">AI Insights</span>
-            </div>
-            <div className="placeholder-chart">
-              <div className="radar-placeholder">Skill Matrix Visualization</div>
-            </div>
-            <div className="alert-box">
-              <strong>Focus on: Communication</strong>
-              <p>Practice active listening and reducing filler words.</p>
-            </div>
-          </section>
-
-          <section className="recent-sessions">
-            <div className="section-header">
-              <h3>Recent Sessions</h3>
-
-              {/* ✅ FIXED: Now points to your real history page */}
-              <button
-                onClick={goToHistory}
-                className="view-all"
-                style={{ background: 'none', border: 'none', color: 'blue', cursor: 'pointer' }}
-              >
-                View All
-              </button>
-            </div>
-
-            <table className="sessions-table">
-              <thead>
-                <tr>
-                  <th>Role</th>
-                  <th>Date</th>
-                  <th>Score</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {mockSessions.map((session) => (
-                  <tr key={session.id}>
-                    <td>{session.role}</td>
-                    <td>{session.date}</td>
-                    <td><span className="score-tag">{session.score}%</span></td>
-
-                    {/* ✅ FIXED: Details now navigates to Session Results */}
-                    <td>
-                      <button
-                        className="text-btn"
-                        onClick={() => goToSessionDetails(session)}
-                        style={{ cursor: 'pointer' }}
-                      >
-                        Details
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
+          <button className="nav-btn" onClick={() => navigate('/session/history')}>
+            <Clock size={16} /> Interview History
+          </button>
+          <button className="nav-btn" onClick={() => navigate('/progress')}>
+            <BarChart2 size={16} /> Progress Dashboard
+          </button>
         </div>
 
-        <div className="content-right">
-          <section className="recommendations">
-            <h3>Recommended for You</h3>
+        <div className="header-right">
+          <div className="profile-menu-container">
+            <button className="profile-trigger" onClick={() => setIsProfileOpen(!isProfileOpen)}>
+              <div className="avatar">
+                {mockUser.avatar ? <img src={mockUser.avatar} alt="User" /> : <User size={20} />}
+              </div>
+              <span>{mockUser.name.split(' ')[0]}</span>
+              <ChevronDown size={14} />
+            </button>
 
-            <div
-              className="rec-card"
-              onClick={() => navigate('/session/hr')}
-              style={{ cursor: 'pointer' }}
-            >
-              <span>Behavioral</span>
-              <h4>Handle Conflict Questions</h4>
-              <p>Based on your last session feedback.</p>
+            {isProfileOpen && (
+              <div className="profile-dropdown">
+                <div className="dropdown-item" onClick={() => navigate('/profile')}>
+                  <Settings size={16} /> Settings
+                </div>
+                <div className="dropdown-item logout" onClick={() => console.log("Logout logic")}>
+                  <LogOut size={16} /> Logout
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </nav>
+
+      {/* --- MAIN CONTENT (New Actionable Layout) --- */}
+      <main className="dashboard-container">
+        <header className="hero-greeting">
+          <h1>Welcome back, {mockUser.name.split(' ')[0]}! 👋</h1>
+          <p>Your path to {mockUser.role || 'Professional'} success starts with today's practice.</p>
+        </header>
+
+        {/* 2. The Stats Row */}
+        <div className="stats-widgets-container">
+          <div className="stat-widget best-score">
+            <div className="widget-icon"><Star size={24} /></div>
+            <div className="widget-data">
+              <span className="widget-label">Best Score</span>
+              <span className="widget-value">{mockUser.stats.bestScore}%</span>
             </div>
+          </div>
 
-            <div
-              className="rec-card secondary"
-              onClick={() => navigate('/session/technical')}
-              style={{ cursor: 'pointer' }}
-            >
-              <span>Technical</span>
-              <h4>System Design Basics</h4>
-              <p>Recommended for {mockUser.role} roles.</p>
+          <div className="stat-widget streak">
+            <div className="widget-icon"><Flame size={24} /></div>
+            <div className="widget-data">
+              <span className="widget-label">Daily Streak</span>
+              <span className="widget-value">{mockUser.stats.currentStreak} Days</span>
+            </div>
+          </div>
+
+          <div className="stat-widget level">
+            <div className="widget-icon"><Trophy size={24} /></div>
+            <div className="widget-data">
+              <span className="widget-label">User Level</span>
+              <span className="widget-value">Lvl {mockUser.stats.level || 12}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 3, 4, & 5. Actionable Insights Grid */}
+        <div className="action-grid">
+          <section className="warmup-card">
+            <div className="section-title">
+              <Mic size={20} />
+              <h3>Question of the Day</h3>
+            </div>
+            <div className="card-body">
+              <p className="prompt-text">"How do you prioritize your tasks when faced with multiple tight deadlines?"</p>
+              
+              {!showFeedback ? (
+                <button 
+                  className={`record-action-btn ${isRecording ? 'recording' : ''}`} 
+                  onClick={handleRecordClick}
+                >
+                  {isRecording ? <><div className="pulse-dot"></div> Recording...</> : <><Camera size={18} /> Record 30s Clip</>}
+                </button>
+              ) : (
+                <div className="ai-quick-feedback">
+                  <h4>✨ AI Quick Feedback</h4>
+                  <p>Great confidence! You structured your answer using the STAR method well, but consider mentioning specific tools.</p>
+                  <button className="reset-btn" onClick={() => setShowFeedback(false)}>Try Again</button>
+                </div>
+              )}
             </div>
           </section>
 
-          <section className="achievements">
-            <h3>Achievements</h3>
-            <div className="badge-grid">
-              <div className="badge-item" title="7 Day Streak">🔥</div>
-              <div className="badge-item" title="Quick Learner">⚡</div>
-              <div className="badge-item locked">🔒</div>
+          <section className="alert-card">
+            <div className="section-title">
+              <AlertCircle size={20} color="#f59e0b" />
+              <h3>Watch Out!</h3>
+            </div>
+            <div className="card-body">
+              <div className="alert-box">
+                <p>AI detected that your <strong>eye contact</strong> dropped by 15% during technical explanations last session.</p>
+                <div className="alert-footer">Proactive Alert • High Priority</div>
+              </div>
+            </div>
+          </section>
+
+          <section className="market-card">
+            <div className="section-title">
+              <TrendingUp size={20} />
+              <h3>Market Readiness</h3>
+            </div>
+            <div className="card-body">
+              <div className="benchmark-viz">
+                <div className="viz-circle">
+                  <span className="percentile">72%</span>
+                </div>
+                <p>You are outperforming <strong>72% of candidates</strong> in your role.</p>
+              </div>
+              <div className="benchmark-bar-container">
+                <div className="benchmark-bar-fill" style={{width: '72%'}}></div>
+              </div>
             </div>
           </section>
         </div>
-      </div>
+      </main>
     </div>
   );
 };

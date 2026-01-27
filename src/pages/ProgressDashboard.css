@@ -1,0 +1,89 @@
+:root {
+  --primary-blue: #2563eb;
+  --bg-gray: #f8fafc;
+  --white: #ffffff;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+}
+
+.progress-wrapper { background: var(--bg-gray); min-height: 100vh; font-family: 'Inter', sans-serif; }
+
+/* --- HEADER --- */
+.progress-nav {
+  height: 70px; background: var(--white); border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; 
+  padding: 0 40px; position: sticky; top: 0; z-index: 100;
+}
+
+.logo {
+  font-size: 24px; font-weight: 800; color: var(--primary-blue);
+  cursor: pointer; letter-spacing: -0.5px;
+}
+
+.back-btn { display: flex; align-items: center; gap: 8px; border: none; background: none; cursor: pointer; color: var(--text-muted); font-weight: 600; }
+.nav-right { display: flex; justify-content: flex-end; }
+
+/* --- TRENDY SEGMENTED CONTROL --- */
+.segmented-control {
+  position: relative; display: flex; background: #f1f5f9; padding: 4px; border-radius: 12px;
+  width: 210px; border: 1px solid var(--border);
+}
+
+.segment-btn {
+  position: relative; flex: 1; height: 32px; border: none; background: none;
+  cursor: pointer; font-size: 11px; font-weight: 700; color: var(--text-muted);
+  z-index: 2; transition: color 0.3s ease;
+}
+
+.segment-btn.active { color: var(--primary-blue); }
+
+.selection-slider {
+  position: absolute; top: 4px; left: 4px; width: calc(33.33% - 4px); height: calc(100% - 8px);
+  background: var(--white); border-radius: 9px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- PAGE CONTENT --- */
+.progress-container { max-width: 1300px; margin: 0 auto; padding: 40px 20px; }
+.progress-header { margin-bottom: 30px; }
+.progress-header h1 { font-size: 32px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+.progress-header p { color: var(--text-muted); font-size: 16px; }
+
+.analytics-grid { display: grid; gap: 24px; margin-bottom: 24px; }
+.top-row { grid-template-columns: 1fr 1fr; }
+.main-row { grid-template-columns: 1.6fr 1fr; }
+.bottom-row { grid-template-columns: 1fr 1fr 1fr; }
+
+.chart-card, .stats-card { background: var(--white); border-radius: 20px; border: 1px solid var(--border); padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.chart-header h3 { font-size: 15px; font-weight: 700; color: var(--text-dark); }
+
+/* --- VISUALS --- */
+.radar-mock-container { height: 250px; display: flex; align-items: center; justify-content: center; position: relative; }
+.radar-ring { position: absolute; border: 1px dashed var(--border); border-radius: 50%; width: 180px; height: 180px; }
+.radar-ring.small { width: 90px; height: 90px; }
+.radar-shape { 
+  width: 130px; height: 130px; background: rgba(37, 99, 235, 0.1); 
+  border: 2px solid var(--primary-blue); clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+
+.heatmap-grid { display: grid; grid-template-columns: repeat(14, 1fr); gap: 6px; }
+.heat-square { aspect-ratio: 1; border-radius: 3px; }
+.level-0 { background: #f1f5f9; }
+.level-1 { background: #dbeafe; }
+.level-2 { background: #60a5fa; }
+.level-3 { background: #1e40af; }
+.heatmap-labels { display: flex; align-items: center; justify-content: flex-end; gap: 6px; font-size: 10px; color: var(--text-muted); margin-top: 10px;}
+
+.bar-track { height: 8px; background: #f1f5f9; border-radius: 10px; margin: 6px 0; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 10px; }
+
+.badge-row { display: flex; gap: 12px; }
+.badge-circle { width: 48px; height: 48px; background: var(--bg-gray); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid var(--border); }
+.badge-circle.locked { filter: grayscale(1); opacity: 0.3; }
+
+.insight-item { display: flex; gap: 12px; padding: 12px; background: var(--bg-gray); border-radius: 12px; margin-bottom: 10px; align-items: center; }
+.insight-icon { font-size: 18px; }
+.insight-item p { font-size: 13px; color: var(--text-dark); margin: 0; }
