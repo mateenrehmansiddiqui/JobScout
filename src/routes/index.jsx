@@ -40,3 +40,5 @@ export const router = createBrowserRouter([
   { path: '/session/results', element: <SessionResults /> },
   { path: "/session/history", element: <SessionHistory /> },
 ]);
+
+// testing
