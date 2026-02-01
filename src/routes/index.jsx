@@ -11,6 +11,7 @@ import NewSessionPage from '../pages/NewSessionPage';
 import ProfileSettings from '../pages/ProfileSettings';    // Added
 
 // Session pages
+import ActiveInterviewSession from '../pages/ActiveInterviewSession';
 import ActiveSessionHR from '../pages/ActiveSessionHR';
 import ActiveSessionTechnical from '../pages/ActiveSessionTechnical';
 import ActiveSessionPanel from '../pages/ActiveSessionPanel';
@@ -32,6 +33,7 @@ export const router = createBrowserRouter([
   { path: '/profile', element: <ProfileSettings /> },   // Linked from Dropdown
 
   // ✅ Sessions
+  { path: '/session/active', element: <ActiveInterviewSession /> },
   { path: '/session/hr', element: <ActiveSessionHR /> },
   { path: '/session/technical', element: <ActiveSessionTechnical /> },
   { path: '/session/panel', element: <ActiveSessionPanel /> },
