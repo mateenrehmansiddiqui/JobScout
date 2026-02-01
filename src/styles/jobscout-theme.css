@@ -1,0 +1,72 @@
+/* ========================================
+   JOBSCOUT MASTER THEME - DO NOT MODIFY
+   ========================================
+   These are the EXACT colors used in Dashboard.css
+   Any deviation will break consistency
+   ======================================== */
+
+:root {
+  /* BACKGROUND COLORS - USING THE LIGHTER SHADE YOU LIKE */
+  --jobscout-bg-primary: #0a0b1e;
+  --jobscout-bg-secondary: #151832;
+  --jobscout-bg-card: #1a1d3a;
+  --jobscout-bg-elevated: #212448;
+  
+  /* NEW: Your favorite lighter shade as main accent */
+  --jobscout-favorite-light: rgba(129, 140, 248, 0.12);
+  --jobscout-favorite-light-solid: #818cf8;
+  
+  /* TEXT COLORS - EXACT FROM DASHBOARD */
+  --jobscout-text-primary: #ffffff;
+  --jobscout-text-secondary: #e2e8f0;
+  --jobscout-text-muted: #94a3b8;
+  
+  /* ACCENT COLORS - EXACT FROM DASHBOARD */
+  --jobscout-accent-primary: #6366f1;
+  --jobscout-accent-secondary: #818cf8;
+  --jobscout-accent-glow: #818cf8;
+  
+  /* BORDER COLORS - EXACT FROM DASHBOARD */
+  --jobscout-border-primary: #2d3561;
+  --jobscout-border-light: #3d4571;
+  
+  /* STATUS COLORS - EXACT FROM DASHBOARD */
+  --jobscout-success: #22d3ee;
+  --jobscout-danger: #f87171;
+  
+  /* SPECIAL COLORS - EXACT FROM DASHBOARD */
+  --jobscout-stat-number: #f0f4ff;
+  --jobscout-hero-stat-bg: rgba(99, 102, 241, 0.1);
+  --jobscout-hero-stat-border: rgba(99, 102, 241, 0.2);
+  
+  /* BACKGROUND PATTERN - EXACT FROM DASHBOARD */
+  --jobscout-pattern-1: rgba(99, 102, 241, 0.15);
+  --jobscout-pattern-2: rgba(129, 140, 248, 0.12);
+  
+  /* GLOW EFFECTS - EXACT FROM DASHBOARD */
+  --jobscout-glow-primary: rgba(99, 102, 241, 0.4);
+  --jobscout-glow-secondary: rgba(129, 140, 248, 0.3);
+}
+
+/* ========================================
+   USAGE EXAMPLES FOR YOUR FRIEND
+   ======================================== */
+
+/* Example: How to use these colors */
+.example-usage {
+  /* Use these EXACT variable names */
+  background: var(--jobscout-bg-primary);
+  color: var(--jobscout-text-primary);
+  border: 1px solid var(--jobscout-border-primary);
+}
+
+.example-card {
+  background: var(--jobscout-bg-card);
+  border: 1px solid var(--jobscout-border-light);
+}
+
+.example-accent {
+  color: var(--jobscout-accent-primary);
+  background: var(--jobscout-hero-stat-bg);
+  border: 1px solid var(--jobscout-hero-stat-border);
+}

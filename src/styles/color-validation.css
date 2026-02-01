@@ -1,0 +1,21 @@
+/* ========================================
+   COLOR VALIDATION TOOL
+   Use this to check if colors match exactly
+   ======================================== */
+
+/* Add this to a test page to validate colors */
+.validation-test {
+  /* These should look identical to dashboard */
+  background: var(--jobscout-bg-primary); /* Should be #0a0b1e */
+  color: var(--jobscout-text-primary);   /* Should be #ffffff */
+  border: 2px solid var(--jobscout-accent-primary); /* Should be #6366f1 */
+}
+
+/* Compare side-by-side with dashboard */
+.dashboard-match {
+  background: #0a0b1e; /* Hardcode for comparison */
+}
+
+.landing-match {
+  background: var(--jobscout-bg-primary); /* Should match exactly */
+}
