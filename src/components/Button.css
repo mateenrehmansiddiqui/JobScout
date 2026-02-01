@@ -18,12 +18,12 @@
 }
 
 .btn-primary {
-  background-color: #2563eb;
-  color: white;
+  background-color: var(--accent-primary, #2563eb);
+  color: var(--text-primary, #ffffff);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: #1e40af;
+  background-color: var(--accent-secondary, #3b82f6);
 }
 
 .btn-secondary {

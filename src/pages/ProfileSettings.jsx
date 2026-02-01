@@ -62,109 +62,115 @@ const ProfileSettings = () => {
           <div className="content-container">
             {activeTab === 'profile' && (
               <section className="fade-in">
-                <header className="section-header">
-                  <h2>Profile Information</h2>
-                  <p>Update your personal details and career targets.</p>
-                </header>
+                <div className="settings-card dark-card">
+                  <header className="section-header">
+                    <h2>Profile Information</h2>
+                    <p>Update your personal details and career targets.</p>
+                  </header>
 
-                <div className="avatar-upload-section">
-                  <div className="profile-avatar-large">
-                    {mockUser.avatar ? <img src={mockUser.avatar} alt="Avatar" /> : <User size={40} />}
-                    <div className="avatar-overlay">
-                      <Camera size={20} />
+                  <div className="avatar-upload-section">
+                    <div className="profile-avatar-large">
+                      {mockUser.avatar ? <img src={mockUser.avatar} alt="Avatar" /> : <User size={40} />}
+                      <div className="avatar-overlay">
+                        <Camera size={20} />
+                      </div>
+                    </div>
+                    <div className="avatar-text">
+                      <h4>Profile Picture</h4>
+                      <p>JPG, GIF or PNG. Max size of 2MB.</p>
                     </div>
                   </div>
-                  <div className="avatar-text">
-                    <h4>Profile Picture</h4>
-                    <p>JPG, GIF or PNG. Max size of 2MB.</p>
-                  </div>
-                </div>
 
-                <div className="form-grid">
-                  <div className="input-group">
-                    <label>Full Name</label>
-                    <input type="text" defaultValue={mockUser.name} />
+                  <div className="form-grid">
+                    <div className="input-group">
+                      <label>Full Name</label>
+                      <input type="text" defaultValue={mockUser.name} />
+                    </div>
+                    <div className="input-group">
+                      <label>Email Address</label>
+                      <input type="email" defaultValue={mockUser.email} />
+                    </div>
+                    <div className="input-group">
+                      <label>Current Role</label>
+                      <input type="text" defaultValue="Junior Developer" />
+                    </div>
+                    <div className="input-group">
+                      <label>Target Role</label>
+                      <input type="text" defaultValue="Full Stack Engineer" />
+                    </div>
+                    <div className="input-group full-width">
+                      <label>Education</label>
+                      <input type="text" defaultValue="BS Computer Science, XYZ University" />
+                    </div>
                   </div>
-                  <div className="input-group">
-                    <label>Email Address</label>
-                    <input type="email" defaultValue={mockUser.email} />
-                  </div>
-                  <div className="input-group">
-                    <label>Current Role</label>
-                    <input type="text" defaultValue="Junior Developer" />
-                  </div>
-                  <div className="input-group">
-                    <label>Target Role</label>
-                    <input type="text" defaultValue="Full Stack Engineer" />
-                  </div>
-                  <div className="input-group full-width">
-                    <label>Education</label>
-                    <input type="text" defaultValue="BS Computer Science, XYZ University" />
-                  </div>
+                  
+                  <footer className="form-footer">
+                    <button className="save-btn" onClick={handleSave}>
+                      {isSaved ? <><CheckCircle size={18} /> Changes Saved</> : 'Save Changes'}
+                    </button>
+                  </footer>
                 </div>
-                
-                <footer className="form-footer">
-                  <button className="save-btn" onClick={handleSave}>
-                    {isSaved ? <><CheckCircle size={18} /> Changes Saved</> : 'Save Changes'}
-                  </button>
-                </footer>
               </section>
             )}
 
             {activeTab === 'resume' && (
               <section className="fade-in">
-                <header className="section-header">
-                  <h2>Resume Management</h2>
-                  <p>Manage the resume used by AI to tailor your interviews.</p>
-                </header>
+                <div className="settings-card dark-card">
+                  <header className="section-header">
+                    <h2>Resume Management</h2>
+                    <p>Manage the resume used by AI to tailor your interviews.</p>
+                  </header>
 
-                <div className="resume-card">
-                  <div className="resume-info">
-                    <div className="file-icon"><FileText size={24} /></div>
-                    <div>
-                      <h4>John_Doe_Resume_2026.pdf</h4>
-                      <p>Uploaded Jan 15, 2026 • 1.2 MB</p>
+                  <div className="resume-card">
+                    <div className="resume-info">
+                      <div className="file-icon"><FileText size={24} /></div>
+                      <div>
+                        <h4>John_Doe_Resume_2026.pdf</h4>
+                        <p>Uploaded Jan 15, 2026 • 1.2 MB</p>
+                      </div>
+                    </div>
+                    <div className="resume-actions">
+                      <button className="icon-btn" title="Preview"><Eye size={18} /></button>
+                      <button className="icon-btn" title="Download"><Download size={18} /></button>
+                      <button className="icon-btn delete" title="Delete"><Trash2 size={18} /></button>
                     </div>
                   </div>
-                  <div className="resume-actions">
-                    <button className="icon-btn" title="Preview"><Eye size={18} /></button>
-                    <button className="icon-btn" title="Download"><Download size={18} /></button>
-                    <button className="icon-btn delete" title="Delete"><Trash2 size={18} /></button>
-                  </div>
-                </div>
 
-                <div className="upload-dropzone">
-                  <Upload size={32} />
-                  <p><strong>Click to upload</strong> or drag and drop</p>
-                  <span>PDF, DOCX (Max 5MB)</span>
+                  <div className="upload-dropzone">
+                    <Upload size={32} />
+                    <p><strong>Click to upload</strong> or drag and drop</p>
+                    <span>PDF, DOCX (Max 5MB)</span>
+                  </div>
                 </div>
               </section>
             )}
 
             {activeTab === 'notifications' && (
               <section className="fade-in">
-                <header className="section-header">
-                  <h2>Notification Preferences</h2>
-                  <p>Control how and when we contact you.</p>
-                </header>
+                <div className="settings-card dark-card">
+                  <header className="section-header">
+                    <h2>Notification Preferences</h2>
+                    <p>Control how and when we contact you.</p>
+                  </header>
 
-                <div className="toggle-list">
-                  {[
-                    { title: "Practice Reminders", desc: "Get nudged when you haven't practiced in 2 days." },
-                    { title: "Streak Alerts", desc: "Notifications to help you keep your daily momentum." },
-                    { title: "Performance Insights", desc: "Weekly summaries of your AI analysis." }
-                  ].map((item, idx) => (
-                    <div className="toggle-item" key={idx}>
-                      <div className="toggle-text">
-                        <h4>{item.title}</h4>
-                        <p>{item.desc}</p>
+                  <div className="toggle-list">
+                    {[
+                      { title: "Practice Reminders", desc: "Get nudged when you haven't practiced in 2 days." },
+                      { title: "Streak Alerts", desc: "Notifications to help you keep your daily momentum." },
+                      { title: "Performance Insights", desc: "Weekly summaries of your AI analysis." }
+                    ].map((item, idx) => (
+                      <div className="toggle-item" key={idx}>
+                        <div className="toggle-text">
+                          <h4>{item.title}</h4>
+                          <p>{item.desc}</p>
+                        </div>
+                        <label className="switch">
+                          <input type="checkbox" defaultChecked />
+                          <span className="slider round"></span>
+                        </label>
                       </div>
-                      <label className="switch">
-                        <input type="checkbox" defaultChecked />
-                        <span className="slider round"></span>
-                      </label>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </section>
             )}

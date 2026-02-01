@@ -54,6 +54,103 @@
   align-items: center;
 }
 
+/* Form Styles - Added for blue text visibility */
+.form-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.form-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #2563eb;
+  margin-bottom: 8px;
+}
+
+.form-subtitle {
+  font-size: 16px;
+  color: #3b82f6;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.toggle-password {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+  color: #2563eb;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 24px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.divider-text {
+  padding: 0 16px;
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: 500;
+}
+
 /* Use the exact same styles from your SignUpPage.css for the classes below: */
 /* .brand-logo, .logo-text, .form-input, .submit-btn, .divider, etc. */
 /* If you haven't made them global, ensure they are copied here or put in a common file */
@@ -74,6 +171,28 @@
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+
+.form-footer {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 14px;
+  color: #2563eb;
+}
+
+.link-primary {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.link-primary:hover {
+  color: #1e40af;
+  text-decoration: underline;
 }
 
 @media (max-width: 968px) {

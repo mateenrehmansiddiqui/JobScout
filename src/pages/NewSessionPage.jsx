@@ -8,7 +8,9 @@ const NewSessionPage = () => {
   const fileInputRef = useRef(null); 
   
   const [step, setStep] = useState(1);
-  const [jobType, setJobType] = useState('paste');
+  const [selectedRole, setSelectedRole] = useState('');
+  const [customRole, setCustomRole] = useState('');
+  const [jobDescription, setJobDescription] = useState('');
   const [difficulty, setDifficulty] = useState('Medium');
   const [interviewType, setInterviewType] = useState('HR (Behavioral)'); // Added state for routing
   const [fileName, setFileName] = useState(null); 
@@ -75,19 +77,51 @@ const NewSessionPage = () => {
           {step === 1 && (
             <div className="step-ui anim-fade">
               <h3><FileText size={20} /> Job Details</h3>
-              <div className="mode-toggle">
-                <button className={jobType === 'paste' ? 'active' : ''} onClick={() => setJobType('paste')}>Paste Job Details</button>
-                <button className={jobType === 'select' ? 'active' : ''} onClick={() => setJobType('select')}>Select Role</button>
-              </div>
-              {jobType === 'paste' ? (
-                <textarea className="modern-textarea" placeholder="Paste the job description here..." rows="10" style={{width:'100%', marginTop:'15px'}} />
-              ) : (
-                <select className="modern-select" style={{width:'100%', marginTop:'15px', padding:'10px'}}>
-                  <option>Software Engineer</option>
-                  <option>Data Scientist</option>
-                  <option>Product Manager</option>
+              <div className="input-group">
+                <label>Role *</label>
+                <select 
+                  className="modern-select" 
+                  value={selectedRole} 
+                  onChange={(e) => setSelectedRole(e.target.value)}
+                  style={{width:'100%', padding:'10px'}}
+                >
+                  <option value="">Select a role...</option>
+                  <option value="Software Engineer">Software Engineer</option>
+                  <option value="Data Scientist">Data Scientist</option>
+                  <option value="Product Manager">Product Manager</option>
+                  <option value="UX Designer">UX Designer</option>
+                  <option value="Marketing Manager">Marketing Manager</option>
+                  <option value="Sales Representative">Sales Representative</option>
+                  <option value="Other">Other</option>
                 </select>
+              </div>
+
+              {selectedRole === 'Other' && (
+                <div className="input-group" style={{marginTop:'20px'}}>
+                  <label>Custom Role *</label>
+                  <input 
+                    type="text"
+                    className="modern-textarea"
+                    value={customRole}
+                    onChange={(e) => setCustomRole(e.target.value)}
+                    placeholder="Enter your custom role..."
+                    style={{width:'100%', padding:'10px', minHeight:'50px'}}
+                  />
+                </div>
               )}
+
+              <div className="input-group" style={{marginTop:'20px'}}>
+                <label>Job Description {selectedRole === 'Other' ? '*' : '(Optional)'}</label>
+                <textarea 
+                  className="modern-textarea"
+                  value={jobDescription}
+                  onChange={(e) => setJobDescription(e.target.value)}
+                  placeholder={selectedRole === 'Other' ? "Please provide a detailed job description..." : "Paste the job description here (optional)..."}
+                  rows="8"
+                  style={{width:'100%', marginTop:'10px'}}
+                />
+              </div>
+
               <input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} accept=".pdf,.doc,.docx" />
               <div className={`cv-upload-zone ${fileName ? 'has-file' : ''}`} style={{border:'2px dashed #ccc', padding:'20px', textAlign:'center', marginTop:'20px', borderRadius:'10px'}}>
                 {fileName ? (
@@ -126,16 +160,41 @@ const NewSessionPage = () => {
                   ))}
                 </div>
               </div>
+              <div className="input-group" style={{marginTop:'20px'}}>
+                <label>Number of Questions: <span className="question-count-badge">{numQuestions}</span></label>
+                <input 
+                  type="range" 
+                  min="1" 
+                  max="20" 
+                  value={numQuestions} 
+                  onChange={(e) => setNumQuestions(parseInt(e.target.value))}
+                  className="modern-range"
+                  style={{width:'100%', marginTop:'10px'}}
+                />
+                <div style={{display:'flex', justifyContent:'space-between', fontSize:'12px', color:'#64748b', marginTop:'5px'}}>
+                  <span>1</span>
+                  <span>20</span>
+                </div>
+              </div>
             </div>
           )}
 
           {step === 3 && (
             <div className="step-ui anim-fade">
               <h3><Target size={20} /> Review & Launch</h3>
-              <div className="summary-box" style={{background:'#f8fafc', padding:'20px', borderRadius:'10px'}}>
-                <p>Type: <strong>{interviewType}</strong></p>
-                <p>Difficulty: <strong>{difficulty}</strong></p>
-                <p>Questions: <strong>{numQuestions}</strong></p>
+              <div className="summary-box">
+                <p style={{marginBottom:'20px', fontSize:'15px'}}>
+                  Role: <strong>{selectedRole === 'Other' ? customRole : selectedRole}</strong>
+                </p>
+                <p style={{marginBottom:'20px', fontSize:'15px'}}>
+                  Type: <strong>{interviewType}</strong>
+                </p>
+                <p style={{marginBottom:'20px', fontSize:'15px'}}>
+                  Difficulty: <strong>{difficulty}</strong>
+                </p>
+                <p style={{marginBottom:'0', fontSize:'15px'}}>
+                  Questions: <strong>{numQuestions}</strong>
+                </p>
               </div>
             </div>
           )}
