@@ -53,7 +53,7 @@ const Features = () => {
 
         <div className="features-grid">
           {features.map((feature, index) => (
-            <div key={index} className="feature-card">
+            <div key={index} className="feature-card" style={{ '--feature-color': feature.color }}>
               <div 
                 className="feature-icon-wrapper" 
                 style={{ background: `${feature.color}15` }}

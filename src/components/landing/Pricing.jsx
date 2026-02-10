@@ -17,6 +17,9 @@ const Pricing = () => {
         'Text-based interviews',
         'Progress tracking',
         'Community support',
+        'Basic analytics',
+        'Resume templates',
+        'Interview tips library',
       ],
       cta: 'Get Started',
       highlighted: false,
@@ -39,23 +42,6 @@ const Pricing = () => {
       cta: 'Start Free Trial',
       highlighted: true,
     },
-    {
-      name: 'Enterprise',
-      price: 'Custom',
-      period: 'contact us',
-      description: 'For teams and organizations',
-      features: [
-        'Everything in Pro',
-        'Custom question banks',
-        'Team analytics',
-        'Dedicated account manager',
-        'API access',
-        'White-label option',
-        'SSO integration',
-      ],
-      cta: 'Contact Sales',
-      highlighted: false,
-    },
   ];
 
   return (
@@ -75,9 +61,6 @@ const Pricing = () => {
               key={index}
               className={`pricing-card ${plan.highlighted ? 'highlighted' : ''}`}
             >
-              {plan.highlighted && (
-                <div className="popular-badge">Most Popular</div>
-              )}
 
               <div className="plan-header">
                 <h3 className="plan-name">{plan.name}</h3>

@@ -9,13 +9,8 @@ const HeroSection = () => {
     <section className="hero-section">
       <div className="hero-container">
         <div className="hero-content">
-          <div className="hero-badge">
-            <CheckCircle size={16} />
-            <span>AI-Powered Interview Coach</span>
-          </div>
-          
           <h1 className="hero-title">
-            Master Your Interviews with
+            Master Your Interviews with 
             <span className="hero-title-highlight"> AI-Driven Practice</span>
           </h1>
           
@@ -58,37 +53,6 @@ const HeroSection = () => {
           <p className="hero-subtext">
             ✨ No credit card required • Join 10,000+ job seekers
           </p>
-        </div>
-
-        <div className="hero-image">
-          <img 
-            src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" 
-            alt="Professional interview preparation"
-            className="hero-img"
-          />
-          <div className="hero-image-overlay">
-            <div className="floating-card card-1">
-              <div className="card-icon">📊</div>
-              <div>
-                <div className="card-title">85% Success Rate</div>
-                <div className="card-subtitle">Interview Performance</div>
-              </div>
-            </div>
-            <div className="floating-card card-2">
-              <div className="card-icon">🎯</div>
-              <div>
-                <div className="card-title">10,000+</div>
-                <div className="card-subtitle">Practice Sessions</div>
-              </div>
-            </div>
-            <div className="floating-card card-3">
-              <div className="card-icon">⭐</div>
-              <div>
-                <div className="card-title">4.9/5</div>
-                <div className="card-subtitle">User Rating</div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
