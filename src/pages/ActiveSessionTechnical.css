@@ -1,0 +1,33 @@
+.ts-page { height: 100vh; background: #0f172a; color: #e2e8f0; display: flex; flex-direction: column; overflow: hidden; }
+.ts-header { height: 60px; background: #1e293b; border-bottom: 1px solid #334155; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
+.ts-logo-pill { background: #2563eb; color: white; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+
+.ts-header-left { display: flex; align-items: center; gap: 20px; }
+.ts-timer-wrap { display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #94a3b8; font-size: 14px; }
+
+.ts-btn-run { background: #334155; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; margin-right: 10px; }
+.ts-btn-submit { background: #10b981; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+
+.ts-workspace { flex: 1; display: grid; grid-template-columns: 450px 1fr; overflow: hidden; }
+.ts-panel { display: flex; flex-direction: column; border-right: 1px solid #334155; }
+.ts-panel-head { padding: 12px 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; background: #1e293b; border-bottom: 1px solid #334155; display: flex; align-items: center; gap: 8px; color: #94a3b8; }
+
+.ts-panel-body { padding: 25px; overflow-y: auto; background: #0f172a; }
+.ts-q-title { font-size: 22px; font-weight: 800; margin-bottom: 15px; color: white; }
+.ts-tags { display: flex; gap: 8px; margin-bottom: 20px; }
+.ts-tag { background: #1e293b; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; color: #94a3b8; }
+.ts-tag-easy { background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+
+.ts-q-desc { line-height: 1.7; color: #94a3b8; margin-bottom: 20px; }
+.ts-example { background: #1e293b; padding: 15px; border-radius: 8px; margin-top: 15px; }
+.ts-example pre { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #e2e8f0; margin-top: 8px; }
+
+.ts-editor-panel { background: #1e293b; }
+.ts-editor-header { height: 45px; background: #0f172a; border-bottom: 1px solid #334155; display: flex; align-items: center; justify-content: space-between; padding: 0 15px; }
+.ts-lang-select { background: transparent; color: #94a3b8; border: none; font-size: 13px; font-weight: 600; outline: none; cursor: pointer; }
+.ts-editor-tools { font-size: 11px; display: flex; align-items: center; gap: 6px; color: #64748b; }
+
+.ts-code-editor { flex: 1; background: #0f172a; border: none; resize: none; color: #e2e8f0; padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 15px; line-height: 1.6; outline: none; }
+.ts-console { height: 180px; background: #0f172a; border-top: 1px solid #334155; }
+.ts-console-head { background: #1e293b; padding: 8px 15px; font-size: 11px; font-weight: 700; color: #94a3b8; display: flex; align-items: center; gap: 8px; }
+.ts-console-body { padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #64748b; }

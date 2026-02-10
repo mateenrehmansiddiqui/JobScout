@@ -1,0 +1,21 @@
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Page wrapper */
+.landing-page {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #0a0b1e;
+}
+
+/* Continuous content wrapper */
+.continuous-content {
+  background: #0a0b1e;
+}
+
+/* Ensure sections are properly spaced */
+section {
+  scroll-margin-top: 80px;
+}
