@@ -66,7 +66,7 @@ const ProgressDashboard = () => {
       <main className="progress-container">
         <header className="progress-header">
           <h1>Your Progress Analytics</h1>
-          <p>Deep dive into your interview performance and consistency.</p>
+          <p>Deep dive into your interview performance and consistency!</p>
         </header>
 
         {/* --- ROW 1: GAMIFICATION --- */}

@@ -12,6 +12,10 @@ const ProfileSettings = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('profile');
   const [isSaved, setIsSaved] = useState(false);
+  const [currentStatus, setCurrentStatus] = useState('student');
+  const [educationLevel, setEducationLevel] = useState('bachelors');
+  const [yearsOfExperience, setYearsOfExperience] = useState('0-1');
+  const [preparingFor, setPreparingFor] = useState('first job');
 
   const handleSave = () => {
     setIsSaved(true);
@@ -68,7 +72,7 @@ const ProfileSettings = () => {
                 </header>
 
                 <div className="avatar-upload-section">
-                  <div className="profile-avatar-large">
+                  <div className="profile-avatar-large" onClick={() => console.log("Upload avatar")}>
                     {mockUser.avatar ? <img src={mockUser.avatar} alt="Avatar" /> : <User size={40} />}
                     <div className="avatar-overlay">
                       <Camera size={20} />
@@ -90,16 +94,61 @@ const ProfileSettings = () => {
                     <input type="email" defaultValue={mockUser.email} />
                   </div>
                   <div className="input-group">
-                    <label>Current Role</label>
-                    <input type="text" defaultValue="Junior Developer" />
+                    <label>Current Status</label>
+                    <select 
+                      className="status-select" 
+                      value={currentStatus} 
+                      onChange={(e) => setCurrentStatus(e.target.value)}
+                    >
+                      <option value="student">Student</option>
+                      <option value="graduate">Graduate</option>
+                      <option value="professional">Professional</option>
+                    </select>
                   </div>
                   <div className="input-group">
                     <label>Target Role</label>
                     <input type="text" defaultValue="Full Stack Engineer" />
                   </div>
+                  <div className="input-group">
+                    <label>Education Level</label>
+                    <select 
+                      className="status-select" 
+                      value={educationLevel} 
+                      onChange={(e) => setEducationLevel(e.target.value)}
+                    >
+                      <option value="bachelors">Bachelors</option>
+                      <option value="masters">Masters</option>
+                      <option value="phd">PhD</option>
+                    </select>
+                  </div>
+                  <div className="input-group">
+                    <label>Years of Experience</label>
+                    <select 
+                      className="status-select" 
+                      value={yearsOfExperience} 
+                      onChange={(e) => setYearsOfExperience(e.target.value)}
+                    >
+                      <option value="0-1">0 - 1</option>
+                      <option value="1-3">1 - 3</option>
+                      <option value="3-5">3 - 5</option>
+                      <option value="5+">5+</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div className="form-grid" style={{marginTop: '24px'}}>
                   <div className="input-group full-width">
-                    <label>Education</label>
-                    <input type="text" defaultValue="BS Computer Science, XYZ University" />
+                    <label>What are you preparing for?</label>
+                    <select 
+                      className="status-select" 
+                      value={preparingFor} 
+                      onChange={(e) => setPreparingFor(e.target.value)}
+                    >
+                      <option value="first job">First Job</option>
+                      <option value="job switch">Job Switch</option>
+                      <option value="promotion">Promotion</option>
+                      <option value="internship">Internship</option>
+                    </select>
                   </div>
                 </div>
                 
@@ -166,6 +215,143 @@ const ProfileSettings = () => {
                     </div>
                   ))}
                 </div>
+              </section>
+            )}
+
+            {activeTab === 'account' && (
+              <section className="fade-in">
+                <header className="section-header">
+                  <h2>Account Settings</h2>
+                  <p>Manage your account preferences and subscription.</p>
+                </header>
+
+                <div className="form-grid">
+                  <div className="input-group">
+                    <label>Time Zone</label>
+                    <input type="text" defaultValue="UTC+05:30" />
+                  </div>
+                  <div className="input-group">
+                    <label>Date Format</label>
+                    <input type="text" defaultValue="DD/MM/YYYY" />
+                  </div>
+                </div>
+
+                <div className="form-grid" style={{marginTop: '24px'}}>
+                  <div className="input-group full-width">
+                    <label>Manage Subscription</label>
+                    <div className="subscription-card" style={{padding: '16px', border: '1px solid #e2e8f0', borderRadius: '12px', background: 'white'}}>
+                      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <div>
+                          <h4 style={{margin: '0 0 4px 0', fontSize: '15px', fontWeight: '500'}}>Free</h4>
+                          <p style={{margin: 0, color: '#64748b', fontSize: '13px'}}>$0/month</p>
+                        </div>
+                        <button className="change-subscription-btn" style={{padding: '8px 16px', background: 'var(--primary)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '13px', fontWeight: '600', cursor: 'pointer'}}>
+                          Change Subscription
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="toggle-item">
+                  <div className="toggle-text">
+                    <h4>Two-Factor Authentication</h4>
+                    <p>Add an extra layer of security to your account</p>
+                  </div>
+                  <label className="switch">
+                    <input type="checkbox" />
+                    <span className="slider round"></span>
+                  </label>
+                </div>
+
+                <div className="toggle-item">
+                  <div className="toggle-text">
+                    <h4>Email Notifications</h4>
+                    <p>Receive updates and alerts via email</p>
+                  </div>
+                  <label className="switch">
+                    <input type="checkbox" defaultChecked />
+                    <span className="slider round"></span>
+                  </label>
+                </div>
+
+                <footer className="form-footer">
+                  <button className="save-btn" onClick={handleSave}>
+                    {isSaved ? <><CheckCircle size={18} /> Changes Saved</> : 'Save Changes'}
+                  </button>
+                </footer>
+              </section>
+            )}
+
+            {activeTab === 'privacy' && (
+              <section className="fade-in">
+                <header className="section-header">
+                  <h2>Privacy & Security</h2>
+                  <p>Control your data and privacy preferences.</p>
+                </header>
+
+                <div className="toggle-item">
+                  <div className="toggle-text">
+                    <h4>Analytics Tracking</h4>
+                    <p>Help us improve by sharing usage analytics</p>
+                  </div>
+                  <label className="switch">
+                    <input type="checkbox" defaultChecked />
+                    <span className="slider round"></span>
+                  </label>
+                </div>
+
+                <div className="toggle-item">
+                  <div className="toggle-text">
+                    <h4>Data Processing</h4>
+                    <p>Allow AI to process your resume and interview data</p>
+                  </div>
+                  <label className="switch">
+                    <input type="checkbox" defaultChecked />
+                    <span className="slider round"></span>
+                  </label>
+                </div>
+
+                <div className="toggle-item">
+                  <div className="toggle-text">
+                    <h4>Session Management</h4>
+                    <p>Remember login across devices</p>
+                  </div>
+                  <label className="switch">
+                    <input type="checkbox" defaultChecked />
+                    <span className="slider round"></span>
+                  </label>
+                </div>
+
+                <div className="form-grid" style={{marginTop: '32px'}}>
+                  <div className="input-group full-width">
+                    <label>Change Password</label>
+                    <input type="password" placeholder="Current password" />
+                  </div>
+                  <div className="input-group">
+                    <label>New Password</label>
+                    <input type="password" placeholder="Enter new password" />
+                  </div>
+                  <div className="input-group">
+                    <label>Confirm New Password</label>
+                    <input type="password" placeholder="Confirm new password" />
+                  </div>
+                </div>
+
+                <div className="danger-zone" style={{marginTop: '32px', padding: '24px', border: '1px solid #fecaca', borderRadius: '12px', background: '#fef2f2'}}>
+                  <h4 style={{color: '#dc2626', marginBottom: '8px'}}>Danger Zone!</h4>
+                  <p style={{color: '#7f1d1d', fontSize: '14px', marginBottom: '16px'}}>Irreversible actions that affect your account.</p>
+                  <button className="icon-btn delete" style={{padding: '8px 16px', background: '#fee2e2', color: '#dc2626', border: '1px solid #fecaca'}}>
+                    <Trash2 size={16} style={{marginRight: '8px'}} />
+                    Delete Account
+                  </button>
+                </div>
+
+                <footer className="form-footer">
+                  <button className="save-btn" onClick={handleSave}>
+                    {isSaved ? <><CheckCircle size={18} /> Changes Saved</> : 'Save Changes'}
+                  </button>
+                </footer>
               </section>
             )}
           </div>
