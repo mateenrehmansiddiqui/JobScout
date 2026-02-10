@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   ChevronDown, LogOut, Settings, User, Play, Clock, 
-  BarChart2, Flame, Star, Trophy, Mic, AlertCircle, TrendingUp, Camera 
+  BarChart2, Flame, Star, Trophy, Mic, AlertCircle, TrendingUp, Camera, BookOpen, Award, Target
 } from 'lucide-react';
 import './Dashboard.css';
 import { mockUser } from '../data/mockData';
@@ -66,97 +66,132 @@ const Dashboard = () => {
         </div>
       </nav>
 
-      {/* --- MAIN CONTENT (New Actionable Layout) --- */}
+      {/* --- MAIN CONTENT (New Layout Based on Reference Image) --- */}
       <main className="dashboard-container">
-        <header className="hero-greeting">
-          <h1>Welcome back, {mockUser.name.split(' ')[0]}! 👋</h1>
-          <p>Your path to {mockUser.role || 'Professional'} success starts with today's practice.</p>
-        </header>
-
-        {/* 2. The Stats Row */}
-        <div className="stats-widgets-container">
-          <div className="stat-widget best-score">
-            <div className="widget-icon"><Star size={24} /></div>
-            <div className="widget-data">
-              <span className="widget-label">Best Score</span>
-              <span className="widget-value">{mockUser.stats.bestScore}%</span>
+        {/* Welcome Banner Section */}
+        <section className="welcome-banner">
+          <div className="welcome-content">
+            <h1>Welcome back, {mockUser.name.split(' ')[0]}</h1>
+            <p>Your path to {mockUser.role || 'Professional'} success starts with today's practice.</p>
+          </div>
+          
+          {/* Metrics Cards */}
+          <div className="metrics-cards">
+            <div className="metric-card best-score">
+              <div className="metric-icon">
+                <Star size={20} />
+              </div>
+              <div className="metric-content">
+                <span className="metric-value">{mockUser.stats.bestScore}%</span>
+                <span className="metric-label">BEST SCORE</span>
+              </div>
+            </div>
+            
+            <div className="metric-card streak">
+              <div className="metric-icon">
+                <Flame size={20} />
+              </div>
+              <div className="metric-content">
+                <span className="metric-value">{mockUser.stats.currentStreak}</span>
+                <span className="metric-label">DAY STREAK</span>
+              </div>
+            </div>
+            
+            <div className="metric-card level">
+              <div className="metric-icon">
+                <Trophy size={20} />
+              </div>
+              <div className="metric-content">
+                <span className="metric-value">Lvl {mockUser.stats.level || 12}</span>
+                <span className="metric-label">LEVEL</span>
+              </div>
             </div>
           </div>
+        </section>
 
-          <div className="stat-widget streak">
-            <div className="widget-icon"><Flame size={24} /></div>
-            <div className="widget-data">
-              <span className="widget-label">Daily Streak</span>
-              <span className="widget-value">{mockUser.stats.currentStreak} Days</span>
-            </div>
-          </div>
-
-          <div className="stat-widget level">
-            <div className="widget-icon"><Trophy size={24} /></div>
-            <div className="widget-data">
-              <span className="widget-label">User Level</span>
-              <span className="widget-value">Lvl {mockUser.stats.level || 12}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* 3, 4, & 5. Actionable Insights Grid */}
-        <div className="action-grid">
-          <section className="warmup-card">
-            <div className="section-title">
-              <Mic size={20} />
+        {/* Main Grid Layout */}
+        <div className="dashboard-grid">
+          {/* Question of the Day Card */}
+          <div className="card question-of-day">
+            <div className="card-header">
+              <Mic size={24} />
               <h3>Question of the Day</h3>
             </div>
             <div className="card-body">
-              <p className="prompt-text">"How do you prioritize your tasks when faced with multiple tight deadlines?"</p>
-              
+              <p className="description">Sharpen your interview skills with AI-powered feedback</p>
+              <div className="question-text">
+                "How do you handle conflicts with team members?"
+              </div>
               {!showFeedback ? (
                 <button 
-                  className={`record-action-btn ${isRecording ? 'recording' : ''}`} 
+                  className={`record-btn ${isRecording ? 'recording' : ''}`} 
                   onClick={handleRecordClick}
                 >
-                  {isRecording ? <><div className="pulse-dot"></div> Recording...</> : <><Camera size={18} /> Record 30s Clip</>}
+                  {isRecording ? (
+                    <><div className="pulse-dot"></div> Recording...</>
+                  ) : (
+                    <>Start Recording</>
+                  )}
                 </button>
               ) : (
-                <div className="ai-quick-feedback">
+                <div className="ai-feedback">
                   <h4>✨ AI Quick Feedback</h4>
                   <p>Great confidence! You structured your answer using the STAR method well, but consider mentioning specific tools.</p>
                   <button className="reset-btn" onClick={() => setShowFeedback(false)}>Try Again</button>
                 </div>
               )}
             </div>
-          </section>
+          </div>
 
-          <section className="alert-card">
-            <div className="section-title">
-              <AlertCircle size={20} color="#f59e0b" />
-              <h3>Watch Out!</h3>
+          {/* Learning Resources Card */}
+          <div className="card learning-resources">
+            <div className="card-header">
+              <BookOpen size={24} />
+              <h3>Learning Resources</h3>
             </div>
             <div className="card-body">
-              <div className="alert-box">
-                <p>AI detected that your <strong>eye contact</strong> dropped by 15% during technical explanations last session.</p>
-                <div className="alert-footer">Proactive Alert • High Priority</div>
-              </div>
+              <p className="message">No Previous Interviews Yet. Complete your first practice session to unlock personalized learning resources tailored to your performance.</p>
+              <button className="primary-btn" onClick={() => navigate('/new-session')}>
+                Start First Practice
+              </button>
             </div>
-          </section>
+          </div>
 
-          <section className="market-card">
-            <div className="section-title">
-              <TrendingUp size={20} />
-              <h3>Market Readiness</h3>
+          {/* Your Ranking Card */}
+          <div className="card your-ranking">
+            <div className="card-header">
+              <Award size={24} />
+              <h3>Your Ranking</h3>
             </div>
             <div className="card-body">
-              <div className="benchmark-viz">
-                <div className="viz-circle">
-                  <span className="percentile">72%</span>
+              <div className="circular-progress">
+                <div className="progress-circle">
+                  <span className="percentile">72<span className="percent">%</span></span>
+                  <span className="percentile-text">PERCENTILE</span>
                 </div>
-                <p>You are outperforming <strong>72% of candidates</strong> in your role.</p>
               </div>
-              <div className="benchmark-bar-container">
-                <div className="benchmark-bar-fill" style={{width: '72%'}}></div>
+              <p className="ranking-text">You're performing better than 72% of candidates in your field.</p>
+              <div className="ranking-tags">
+                <span className="tag top-quartile">TOP QUARTILE</span>
+                <span className="tag rising-star">RISING STAR</span>
               </div>
             </div>
-          </section>
+          </div>
+
+          {/* Next Steps Card */}
+          <div className="card next-steps">
+            <div className="card-header">
+              <Target size={24} />
+              <h3>Next Steps</h3>
+            </div>
+            <div className="card-body">
+              <ul className="steps-list">
+                <li>Practice Technical Questions</li>
+                <li>Improve Response Time</li>
+                <li>Industry-Specific Training</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </main>
     </div>
