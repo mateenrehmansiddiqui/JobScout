@@ -4,6 +4,7 @@ import "./SessionResults.css";
 /**
  * JobScout — Session Feedback / Results Page
  * Path: /session/results
+ * Professional Redesign with Modern UI/UX
  */
 
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
@@ -58,7 +59,7 @@ function ProgressBar({ value = 0 }) {
 
 function ScoreGauge({ value = 0 }) {
   const v = clamp(value, 0, 100);
-  const r = 54;
+  const r = 80;
   const c = 2 * Math.PI * r;
   const dash = (v / 100) * c;
 
@@ -66,15 +67,22 @@ function ScoreGauge({ value = 0 }) {
 
   return (
     <div className="gaugeWrap">
-      <svg width="140" height="140" viewBox="0 0 140 140" className="gauge" role="img" aria-label="Overall score gauge">
-        <circle cx="70" cy="70" r={r} className="gaugeTrack" />
+      <svg width="320" height="320" viewBox="0 0 320 320" className="gauge" role="img" aria-label="Overall score gauge">
+        <defs>
+          <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#3b82f6" />
+            <stop offset="50%" stopColor="#8b5cf6" />
+            <stop offset="100%" stopColor="#ec4899" />
+          </linearGradient>
+        </defs>
+        <circle cx="160" cy="160" r={r} className="gaugeTrack" />
         <circle
-          cx="70"
-          cy="70"
+          cx="160"
+          cy="160"
           r={r}
           className="gaugeProg"
           strokeDasharray={`${dash} ${c - dash}`}
-          transform="rotate(-90 70 70)"
+          transform="rotate(-90 160 160)"
         />
       </svg>
 
@@ -88,10 +96,10 @@ function ScoreGauge({ value = 0 }) {
 }
 
 // Simple line chart (progress comparison)
-function MiniLineChart({ points = [], height = 70 }) {
-  const w = 320;
+function MiniLineChart({ points = [], height = 100 }) {
+  const w = 400;
   const h = height;
-  const pad = 10;
+  const pad = 12;
 
   const safe = points.length ? points : [60, 62, 58, 66, 70, 74, 78];
 
@@ -107,13 +115,22 @@ function MiniLineChart({ points = [], height = 70 }) {
     .join(" ");
 
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="miniChart" role="img" aria-label="Progress comparison chart">
-      <path d={`M ${pad} ${pad} L ${pad} ${h - pad} L ${w - pad} ${h - pad}`} className="axis" />
-      <path d={d} className="line" />
-      {xs.map((x, i) => (
-        <circle key={i} cx={x} cy={ys[i]} r="3" className="dot" />
-      ))}
-    </svg>
+    <div className="miniChart">
+      <svg viewBox={`0 0 ${w} ${h}`} role="img" aria-label="Progress comparison chart">
+        <defs>
+          <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#3b82f6" />
+            <stop offset="50%" stopColor="#8b5cf6" />
+            <stop offset="100%" stopColor="#ec4899" />
+          </linearGradient>
+        </defs>
+        <path d={`M ${pad} ${pad} L ${pad} ${h - pad} L ${w - pad} ${h - pad}`} className="axis" />
+        <path d={d} className="line" />
+        {xs.map((x, i) => (
+          <circle key={i} cx={x} cy={ys[i]} r="5" className="dot" />
+        ))}
+      </svg>
+    </div>
   );
 }
 
@@ -229,7 +246,7 @@ function QuestionItem({ q, idx }) {
 export default function SessionResults() {
   const data = useMemo(() => {
     return {
-      header: "Session Complete! Here’s How You Did",
+      header: "Session Complete! Here's How You Did",
       role: "Software Engineer",
       date: new Date().toISOString(),
       duration: "23m 40s",
@@ -306,7 +323,6 @@ export default function SessionResults() {
   }, []);
 
   const [showDetails, setShowDetails] = useState(true);
-  const [showComms, setShowComms] = useState(true);
 
   const onDownload = () => alert("Connect PDF download to backend endpoint later.");
   const onRetake = () => alert("Route to /new-session with same template.");
@@ -444,59 +460,58 @@ export default function SessionResults() {
 
         {/* Communication Analysis */}
         <div className="section">
-          <button className="collapseBtn" onClick={() => setShowComms((s) => !s)} aria-expanded={showComms}>
-            <span className="collapseTitle">Communication Analysis</span>
-            <span className="collapseMeta">{data.commsEnabled ? "Enabled" : "Not enabled"}</span>
-            <span className="chev">{showComms ? "▾" : "▸"}</span>
-          </button>
+          <div className="sectionHeader">
+            <h2 className="sectionTitle">Communication Analysis</h2>
+          </div>
 
-          {showComms && (
-            <div className="collapseBody">
-              {!data.commsEnabled ? (
-                <div className="emptyState">
-                  Communication analysis was not enabled. Enable camera/mic next time to unlock verbal + non-verbal
-                  insights.
+          {!data.commsEnabled ? (
+            <div className="emptyState">
+              Communication analysis was not enabled. Enable camera/mic next time to unlock verbal + non-verbal
+              insights.
+            </div>
+          ) : (
+            <div className="grid2">
+              <div className="cardSoft">
+                <h3 className="subSectionTitle">Verbal Metrics</h3>
+
+                <div className="metricRow">
+                  <MetricGauge
+                    label="Speaking Pace (WPM)"
+                    value={data.comms.verbal.paceScore}
+                    suffix="%"
+                    hint={`You spoke ~${data.comms.verbal.paceWpm} WPM. Target ~130–150 WPM.`}
+                  />
+                  <MetricGauge
+                    label="Filler Words"
+                    value={data.comms.verbal.fillerScore}
+                    suffix="%"
+                    hint={`Detected ~${data.comms.verbal.fillerWords} filler words. Try pauses instead.`}
+                  />
                 </div>
-              ) : (
-                <div className="grid2">
-                  <div className="cardSoft">
-                    <h3 className="subSectionTitle">Verbal Metrics</h3>
 
-                    <div className="metricRow">
-                      <MetricGauge
-                        label="Speaking Pace (WPM)"
-                        value={data.comms.verbal.paceScore}
-                        suffix="%"
-                        hint={`You spoke ~${data.comms.verbal.paceWpm} WPM. Target ~130–150 WPM.`}
-                      />
-                      <MetricGauge
-                        label="Filler Words"
-                        value={data.comms.verbal.fillerScore}
-                        suffix="%"
-                        hint={`Detected ~${data.comms.verbal.fillerWords} filler words. Try pauses instead.`}
-                      />
-                    </div>
+                <MetricGauge
+                  label="Grammar Score"
+                  value={data.comms.verbal.grammarScore}
+                  suffix="%"
+                  hint="Clear grammar improves credibility."
+                />
 
-                    <MetricGauge
-                      label="Grammar Score"
-                      value={data.comms.verbal.grammarScore}
-                      suffix="%"
-                      hint="Clear grammar improves credibility."
-                    />
+                <ToneGraph values={data.comms.verbal.toneValues} />
+              </div>
 
-                    <ToneGraph values={data.comms.verbal.toneValues} />
-                  </div>
+              <div className="cardSoft">
+                <h3 className="subSectionTitle">Non-Verbal Metrics</h3>
 
-                  <div className="cardSoft">
-                    <h3 className="subSectionTitle">Non-Verbal Metrics</h3>
-
-                    <MetricGauge label="Eye Contact" value={data.comms.nonverbal.eyeContact} suffix="%" hint="Maintain steady eye contact naturally." />
-                    <MetricGauge label="Posture" value={data.comms.nonverbal.posture} suffix="%" hint="Open posture signals confidence." />
-                    <MetricGauge label="Gesture Control" value={data.comms.nonverbal.gestures} suffix="%" hint="Avoid fidgeting; use purposeful gestures." />
-                    <MetricGauge label="Confidence Meter" value={data.comms.nonverbal.confidenceMeter} suffix="%" hint="Slow pace + structure boosts confidence." />
-                  </div>
+                <div className="metricRow">
+                  <MetricGauge label="Eye Contact" value={data.comms.nonverbal.eyeContact} suffix="%" hint="Maintain steady eye contact naturally." />
+                  <MetricGauge label="Posture" value={data.comms.nonverbal.posture} suffix="%" hint="Open posture signals confidence." />
                 </div>
-              )}
+                
+                <div className="metricRow">
+                  <MetricGauge label="Gesture Control" value={data.comms.nonverbal.gestures} suffix="%" hint="Avoid fidgeting; use purposeful gestures." />
+                  <MetricGauge label="Confidence Meter" value={data.comms.nonverbal.confidenceMeter} suffix="%" hint="Slow pace + structure boosts confidence." />
+                </div>
+              </div>
             </div>
           )}
         </div>
@@ -523,11 +538,11 @@ export default function SessionResults() {
         </div>
 
         {/* Bottom Actions */}
-        <div className="bottomBar">
-          <button className="btnGhost" onClick={onBack}>
-            Back to Dashboard
-          </button>
-          <div className="bottomRight">
+        <div className="actionsContainer">
+          <div className="actionsGrid">
+            <button className="btnGhost" onClick={onBack}>
+              Back to Dashboard
+            </button>
             <button className="btnSecondary" onClick={onResources}>
               Suggest Resources
             </button>
@@ -539,6 +554,9 @@ export default function SessionResults() {
             </button>
           </div>
         </div>
+        
+        {/* Professional spacing at end */}
+        <div className="pageEndSpacing"></div>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import HowItWorks from '../components/landing/HowItWorks';
 import Features from '../components/landing/Features';
 import SocialProof from '../components/landing/SocialProof';
 import Pricing from '../components/landing/Pricing';
+import FAQ from '../components/landing/FAQ';
 import Footer from '../components/landing/Footer';
 import './LandingPage.css';
 
@@ -17,6 +18,7 @@ const LandingPage = () => {
       <Features />
       <SocialProof />
       <Pricing />
+      <FAQ />
       <Footer />
     </div>
   );

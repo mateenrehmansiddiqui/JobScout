@@ -1,142 +1,199 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Code2, Play, Send, ShieldCheck, TerminalSquare, Timer, BookOpen } from 'lucide-react';
+import {
+  Timer, Flag,
+  ChevronLeft, ChevronRight, Video
+} from 'lucide-react';
 import './ActiveSessionTechnical.css';
+
+const TECH_DATA = {
+  persona: { name: 'Hamid Ali (Tech Lead)', subtitle: 'Senior Engineer', initials: 'SC' },
+  role: 'Software Engineer',
+  totalQuestions: 4,
+  questions: [
+    { title: 'Array Manipulation', text: 'Implement a function to find the maximum subarray sum.', hint: 'Consider Kadane\'s algorithm.' },
+    { title: 'String Processing', text: 'Write a function to check if a string is a valid palindrome.', hint: 'Ignore non-alphanumeric characters.' },
+    { title: 'Binary Tree', text: 'Find the maximum depth of a binary tree.', hint: 'Use recursive DFS traversal.' },
+    { title: 'System Design', text: 'Design a URL shortening service like TinyURL.', hint: 'Consider scalability and caching.' }
+  ],
+};
 
 export default function ActiveSessionTechnical() {
   const navigate = useNavigate();
-  const [startedAt] = useState(() => Date.now());
-  const [code, setCode] = useState("// Write your solution here\nfunction solve(input) {\n  return null;\n}");
   const [qIndex, setQIndex] = useState(0);
 
-  // For now, one question demo — expand later
-  const totalQuestions = 1;
+  // Count up timer (elapsed time)
+  const [elapsedTime, setElapsedTime] = useState(0);
 
+  const [answers, setAnswers] = useState({});
+  const [showHelp, setShowHelp] = useState(true);
+  const [showTextBox, setShowTextBox] = useState(false);
+
+  // Track session start time for duration calculation
+  const [startedAt] = useState(() => Date.now());
+
+  useEffect(() => {
+    const id = setInterval(() => setElapsedTime((t) => t + 1), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const mm = String(Math.floor(elapsedTime / 60)).padStart(2, '0');
+  const ss = String(elapsedTime % 60).padStart(2, '0');
+
+  const q = TECH_DATA.questions[qIndex];
+  const progress = ((qIndex + 1) / TECH_DATA.totalQuestions) * 100;
+
+  // ✅ compute duration nicely
   const durationText = useMemo(() => {
-    const elapsedSec = Math.max(0, Math.floor((Date.now() - startedAt) / 1000));
-    const m = Math.floor(elapsedSec / 60);
-    const s = elapsedSec % 60;
+    const m = Math.floor(elapsedTime / 60);
+    const s = elapsedTime % 60;
     return `${m}m ${String(s).padStart(2, "0")}s`;
-  }, [startedAt]);
+  }, [elapsedTime]);
 
-  // Placeholder score — later you can compute based on tests passed
+  // ✅ simple scoring placeholder (for now) based on answered questions
   const computedScore = useMemo(() => {
-    const hasCode = (code || "").trim().length > 30;
-    return hasCode ? 78 : 55;
-  }, [code]);
+    const answeredCount = Object.values(answers).filter((a) => (a || "").trim().length > 0).length;
+    // basic: 50 base + up to 50 based on completion
+    return Math.min(100, 50 + Math.round((answeredCount / TECH_DATA.totalQuestions) * 50));
+  }, [answers]);
 
   const computedPercentile = useMemo(() => {
-    if (computedScore >= 85) return 12;
-    if (computedScore >= 75) return 22;
+    // placeholder mapping from score → percentile band
+    if (computedScore >= 85) return 15;
+    if (computedScore >= 75) return 25;
     if (computedScore >= 65) return 35;
     return 50;
   }, [computedScore]);
 
+  // ✅ Route to Results page (this is the LINK you need)
   const goToResults = () => {
     const sessionMeta = {
-      id: `TECH-${Date.now()}`,
+      id: `TECH-${Date.now()}`,              // temporary ID (replace with backend id later)
       dateTime: new Date().toISOString(),
-      role: "Software Engineer",
+      role: TECH_DATA.role,
       type: "Technical",
       duration: durationText,
       score: computedScore,
       percentile: computedPercentile,
-      questionsAnswered: 1,
-      totalQuestions,
+      questionsAnswered: Object.values(answers).filter((a) => (a || "").trim().length > 0).length,
+      totalQuestions: TECH_DATA.totalQuestions,
     };
 
+    // Send both meta + detailed Q/A so Results page can show it later if you want
     const sessionDetails = {
-      questions: [
-        {
-          title: "Longest Substring Without Repeating Characters",
-          question: "Given a string s, find the length of the longest substring without repeating characters.",
-          answer: code,
-        },
-      ],
+      questions: TECH_DATA.questions.map((qq, idx) => ({
+        question: qq.text,
+        title: qq.title,
+        answer: answers[idx] || "",
+      })),
     };
 
-    navigate("/session/results", { state: { sessionMeta, sessionDetails } });
+    navigate("/session/results", {
+      state: { sessionMeta, sessionDetails }
+    });
   };
 
-  const submitSession = () => {
-    const ok = window.confirm("Submit your solution and view results?");
+  // End early (with confirm)
+  const endSessionEarly = () => {
+    const ok = window.confirm("End technical interview session now? Your progress will be saved in this session's results.");
     if (!ok) return;
     goToResults();
   };
 
+  const nextOrFinish = () => {
+    if (qIndex < TECH_DATA.totalQuestions - 1) {
+      setQIndex(qIndex + 1);
+    } else {
+      endSessionEarly();
+    }
+  };
+
   return (
-    <div className="ts-page">
-      <header className="ts-header">
-        <div className="ts-header-left">
-          <div className="ts-logo-pill"><Code2 size={18}/> Technical Alpha</div>
-          <div className="ts-timer-wrap">
-            <Timer size={14}/> <span>{durationText}</span>
-          </div>
+    <div className="tech-page">
+      <div className="tech-bg-blobs"><div className="tech-blob-1" /><div className="tech-blob-2" /></div>
+
+      <header className="tech-topbar">
+        <div className="tech-topbar-left">
+          <div className="tech-logo">JobScout</div>
         </div>
 
-        <div className="ts-header-actions">
-          <button className="ts-btn-run"><Play size={14}/> Run Tests</button>
+        <div className="tech-topbar-center">
+          <div className="tech-pill">Technical Interview - {TECH_DATA.role}</div>
+        </div>
 
-          {/* ✅ Submit goes to Results */}
-          <button className="ts-btn-submit" onClick={submitSession}>
-            <Send size={14}/> Submit
+        <div className="tech-topbar-right">
+          <div className="tech-timer"><Timer size={16}/> {mm}:{ss}</div>
+
+          {/* ✅ changed: End now goes to results (not dashboard) */}
+          <button className="tech-btn-danger" onClick={endSessionEarly}>
+            <Flag size={16}/> End
           </button>
         </div>
       </header>
 
-      <main className="ts-container">
-        <div className="ts-workspace">
-          {/* Left Panel: Question */}
-          <section className="ts-panel ts-question-panel">
-            <div className="ts-panel-head"><BookOpen size={16}/> Problem Description</div>
-            <div className="ts-panel-body">
-              <h1 className="ts-q-title">Longest Substring Without Repeating Characters</h1>
-              <div className="ts-tags">
-                <span className="ts-tag-easy">Medium</span>
-                <span className="ts-tag">Hash Table</span>
-                <span className="ts-tag">Sliding Window</span>
-              </div>
-              <p className="ts-q-desc">
-                Given a string <code>s</code>, find the length of the longest substring without repeating characters.
-              </p>
-              <div className="ts-example">
-                <strong>Example 1:</strong>
-                <pre>Input: s = "abcabcbb" {"\n"}Output: 3</pre>
-              </div>
-              <p style={{ marginTop: 10, opacity: 0.85 }}>
-                <strong>Session Score (est.):</strong> {computedScore}/100 · <strong>Percentile:</strong> Top {computedPercentile}%
-              </p>
+      <main className="tech-main-layout">
+        <section className="tech-video-section">
+          <div className="tech-video-grid">
+            <div className="tech-video-item">
+              <h3>{TECH_DATA.persona.name}</h3>
+              <div className="tech-camera-mock tech-interviewer-video">Camera Active</div>
             </div>
-          </section>
+            <div className="tech-video-item">
+              <h3>Self Preview</h3>
+              <div className="tech-camera-mock">Camera Active</div>
+            </div>
+          </div>
+        </section>
 
-          {/* Right Panel: Editor */}
-          <section className="ts-panel ts-editor-panel">
-            <div className="ts-editor-header">
-              <select className="ts-lang-select">
-                <option>JavaScript (ES6)</option>
-                <option>Python 3</option>
-              </select>
-              <div className="ts-editor-tools">
-                <ShieldCheck size={14} color="#10b981" /> <span>Auto-save active</span>
+        <section className="tech-content-card">
+          <div className="tech-question-header">
+            <div className="tech-question-bubble">Question {qIndex + 1}</div>
+            <h3>{q.title}</h3>
+            <p>{q.text}</p>
+          </div>
+          <div className="tech-code-section">
+            <div className="tech-code-header">
+              <div className="tech-code-title">Solution Editor</div>
+              <div className="tech-code-actions">
+                <button className="tech-code-btn">Run</button>
               </div>
             </div>
-
-            <textarea
-              className="ts-code-editor"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              spellCheck="false"
-            />
-
-            <div className="ts-console">
-              <div className="ts-console-head"><TerminalSquare size={14}/> Console</div>
-              <div className="ts-console-body">
-                <span className="ts-console-line">&gt; Ready for input...</span>
+            <div className="tech-code-editor-container">
+              <textarea
+                className="tech-code-editor-main"
+                placeholder="// Write your solution here..."
+                spellCheck={false}
+              />
+            </div>
+            <div className="tech-output-section">
+              <div className="tech-output-header">Output</div>
+              <div className="tech-output-content">
               </div>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
       </main>
+
+      <footer className="tech-bottom-nav">
+        <button 
+          className="tech-nav-btn" 
+          disabled={qIndex === 0} 
+          onClick={() => setQIndex(qIndex - 1)}
+        >
+          <ChevronLeft /> Prev
+        </button>
+
+        <div className="tech-progress-track">
+          <div className="tech-progress-fill" style={{ width: `${progress}%` }} />
+        </div>
+
+        <button 
+          className={`tech-nav-btn ${qIndex === TECH_DATA.totalQuestions - 1 ? 'finish' : ''}`}
+          onClick={nextOrFinish}
+        >
+          {qIndex === TECH_DATA.totalQuestions - 1 ? 'Finish' : 'Next'} <ChevronRight />
+        </button>
+      </footer>
     </div>
   );
 }

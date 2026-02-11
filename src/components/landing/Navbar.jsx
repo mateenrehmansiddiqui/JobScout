@@ -19,7 +19,6 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo" onClick={() => navigate('/')}>
-          <span className="logo-icon">🎯</span>
           <span className="logo-text">JobScout</span>
         </div>
 

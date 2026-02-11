@@ -1,33 +1,82 @@
-.ts-page { height: 100vh; background: #0f172a; color: #e2e8f0; display: flex; flex-direction: column; overflow: hidden; }
-.ts-header { height: 60px; background: #1e293b; border-bottom: 1px solid #334155; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
-.ts-logo-pill { background: #2563eb; color: white; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+.tech-question-header { padding: 10px 20px 10px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
+.tech-question-header .tech-question-bubble { display: inline-block; background: #2563eb; color: white; padding: 6px 12px; border-radius: 16px; font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+.tech-question-header h3 { font-size: 18px; font-weight: 800; margin: 0 0 5px 0; color: #0f172a; }
+.tech-question-header p { font-size: 16px; line-height: 1.5; color: #1e293b; margin: 0 0 8px 0; }
 
-.ts-header-left { display: flex; align-items: center; gap: 20px; }
-.ts-timer-wrap { display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #94a3b8; font-size: 14px; }
+.tech-code-section { display: flex; flex-direction: column; height: 100%; }
+.tech-code-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; margin-top: 0; }
+.tech-code-title { font-size: 16px; font-weight: 700; color: #1e293b; }
+.tech-code-actions { display: flex; gap: 10px; }
+.tech-code-btn { background: #2563eb; color: white; border: none; padding: 6px 20px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+.tech-code-btn:hover { background: #1d4ed8; }
+.tech-code-editor-container { flex: 1; display: flex; flex-direction: column; max-height: 350px; margin: 10px 0; }
+.tech-code-editor-main { flex: 1; background: #0f172a; color: #e2e8f0; border: none; padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; outline: none; resize: none; min-height: 200px; border-radius: 12px; }
+.tech-code-editor-main:focus { box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3); }
+.tech-console-output { background: #1e293b; border-top: 1px solid #334155; }
+.tech-console-header { padding: 10px 15px; font-size: 12px; font-weight: 700; color: #94a3b8; border-bottom: 1px solid #334155; }
+.tech-console-content { padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #e2e8f0; max-height: 120px; overflow-y: auto; }
+.tech-console-line { display: block; margin-bottom: 4px; }
 
-.ts-btn-run { background: #334155; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; margin-right: 10px; }
-.ts-btn-submit { background: #10b981; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.tech-output-section { background: #1e293b; border-top: 1px solid #334155; border-radius: 12px; margin: 10px 0; overflow: hidden; }
+.tech-output-header { padding: 10px 15px; font-size: 12px; font-weight: 700; color: #94a3b8; border-bottom: 1px solid #334155; }
+.tech-output-content { padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #e2e8f0; max-height: 150px; overflow-y: auto; }
+.tech-output-line { display: block; margin-bottom: 4px; }
 
-.ts-workspace { flex: 1; display: grid; grid-template-columns: 450px 1fr; overflow: hidden; }
-.ts-panel { display: flex; flex-direction: column; border-right: 1px solid #334155; }
-.ts-panel-head { padding: 12px 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; background: #1e293b; border-bottom: 1px solid #334155; display: flex; align-items: center; gap: 8px; color: #94a3b8; }
+.tech-page { min-height: 100vh; background: #f0f7ff; color: #1e293b; font-family: 'Inter', sans-serif; position: relative; overflow: hidden; }
+.tech-bg-blobs .tech-blob-1 { position: absolute; top: -10%; left: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%); border-radius: 50%; z-index: 0; }
+.tech-bg-blobs .tech-blob-2 { position: absolute; bottom: -10%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 70%); border-radius: 50%; z-index: 0; }
 
-.ts-panel-body { padding: 25px; overflow-y: auto; background: #0f172a; }
-.ts-q-title { font-size: 22px; font-weight: 800; margin-bottom: 15px; color: white; }
-.ts-tags { display: flex; gap: 8px; margin-bottom: 20px; }
-.ts-tag { background: #1e293b; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; color: #94a3b8; }
-.ts-tag-easy { background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.tech-topbar { height: 70px; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; border-bottom: 1px solid rgba(0,0,0,0.05); position: relative; z-index: 10; }
+.tech-topbar-left { flex: 1; }
+.tech-topbar-center { flex: 1; display: flex; justify-content: center; }
+.tech-topbar-right { flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 15px; }
+.tech-logo { font-size: 24px; font-weight: 800; color: #2563eb; }
+.tech-pill { background: #e0f2fe; color: #0369a1; padding: 8px 20px; border-radius: 20px; font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+.tech-meta { display: flex; flex-direction: column; }
+.tech-meta-title { font-weight: 800; font-size: 15px; }
+.tech-meta-sub { font-size: 12px; color: #64748b; }
+.tech-timer { background: white; padding: 8px 16px; border-radius: 12px; border: 1px solid #e2e8f0; font-weight: 800; display: flex; align-items: center; gap: 8px; }
 
-.ts-q-desc { line-height: 1.7; color: #94a3b8; margin-bottom: 20px; }
-.ts-example { background: #1e293b; padding: 15px; border-radius: 8px; margin-top: 15px; }
-.ts-example pre { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #e2e8f0; margin-top: 8px; }
+.tech-main-layout { max-width: 1400px; margin: 20px auto; display: flex; flex-direction: row; gap: 20px; padding: 0 20px; position: relative; z-index: 5; height: calc(100vh - 150px); }
+.tech-content-card { background: white; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; padding: 20px; flex: 1; overflow-y: auto; margin-bottom: 30px; max-height: calc(100vh - 150px); }
 
-.ts-editor-panel { background: #1e293b; }
-.ts-editor-header { height: 45px; background: #0f172a; border-bottom: 1px solid #334155; display: flex; align-items: center; justify-content: space-between; padding: 0 15px; }
-.ts-lang-select { background: transparent; color: #94a3b8; border: none; font-size: 13px; font-weight: 600; outline: none; cursor: pointer; }
-.ts-editor-tools { font-size: 11px; display: flex; align-items: center; gap: 6px; color: #64748b; }
+.tech-interviewer { display: flex; align-items: center; gap: 15px; }
+.tech-avatar { width: 50px; height: 50px; background: linear-gradient(135deg, #2563eb, #60a5fa); border-radius: 16px; color: white; display: grid; place-items: center; font-weight: 900; }
+.tech-status { font-size: 12px; color: #10b981; display: flex; align-items: center; gap: 5px; }
+.tech-status span { width: 8px; height: 8px; background: #10b981; border-radius: 50%; display: inline-block; }
 
-.ts-code-editor { flex: 1; background: #0f172a; border: none; resize: none; color: #e2e8f0; padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 15px; line-height: 1.6; outline: none; }
-.ts-console { height: 180px; background: #0f172a; border-top: 1px solid #334155; }
-.ts-console-head { background: #1e293b; padding: 8px 15px; font-size: 11px; font-weight: 700; color: #94a3b8; display: flex; align-items: center; gap: 8px; }
-.ts-console-body { padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #64748b; }
+.tech-question-bubble { display: inline-block; background: #2563eb; color: white; padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 16px; margin-bottom: 15px; text-align: center; }
+.tech-question-box { text-align: center; max-width: 900px; margin: 0 auto; }
+.tech-question-box h2 { font-size: 22px; font-weight: 900; margin-top: 15px; color: #0f172a; }
+.tech-question-box p { font-size: 22px; line-height: 1.5; color: #1e293b; margin: 0 0 10px 0; }
+.tech-mic-fallback { margin-top: 15px; }
+.tech-mic-btn { background: #f8fafc; color: #64748b; border: 1px dashed #cbd5e1; padding: 12px 20px; border-radius: 12px; font-size: 14px; cursor: pointer; transition: all 0.3s ease; }
+.tech-mic-btn:hover { background: #f1f5f9; border-color: #94a3b8; color: #475569; }
+.tech-text-box-container { margin-top: 15px; padding: 12px; background: #f8fafc; border-radius: 16px; border: 1px solid #e2e8f0; width: 100%; max-width: 650px; margin-left: auto; margin-right: auto; }
+.tech-text-box-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+.tech-text-box-container .tech-textarea { min-height: 200px; background: white; resize: none; }
+.tech-hint-pill { display: inline-flex; align-items: center; gap: 8px; background: #f8fafc; padding: 8px 16px; border-radius: 12px; font-size: 13px; color: #64748b; border: 1px dashed #cbd5e1; margin: 15px 0; }
+
+.tech-textarea { width: 100%; min-height: 80px; border: 1px solid #e2e8f0; border-radius: 16px; padding: 15px; font-size: 15px; line-height: 1.6; outline: none; transition: 0.2s; background: white; }
+.tech-textarea:focus { border-color: #2563eb; background: white; box-shadow: 0 0 0 4px rgba(37,99,235,0.05); }
+
+.tech-sidebar { display: flex; flex-direction: column; gap: 20px; }
+.tech-video-sidebar { display: flex; flex-direction: column; gap: 20px; }
+.tech-widget { background: white; border-radius: 20px; padding: 20px; border: 1px solid #f1f5f9; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+.tech-widget h3 { font-size: 14px; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+.tech-camera-mock { height: 200px; background: #1e293b; border-radius: 12px; display: grid; place-items: center; color: #475569; font-size: 12px; }
+.tech-video-section { background: white; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; padding: 10px; width: 400px; flex-shrink: 0; margin: 0 0 20px 0; max-height: calc(100vh - 179px); overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+.tech-video-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.tech-video-item h3 { font-size: 13px; font-weight: 700; margin-bottom: 3px; text-align: center; color: #374151; }
+.tech-video-item .tech-camera-mock { height: 200px; font-size: 13px; border-radius: 16px; }
+.tech-interviewer-video { background: linear-gradient(135deg, #2563eb, #60a5fa); color: white; }
+
+.tech-bottom-nav { position: fixed; bottom: 0; width: 100%; height: 80px; background: rgba(255,255,255,0.95); backdrop-filter: blur(15px); display: flex; align-items: center; justify-content: space-between; padding: 0 50px; border-top: 1px solid #f1f5f9; }
+.tech-progress-track { width: 300px; height: 8px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
+.tech-progress-fill { height: 100%; background: #3b82f6; border-radius: 10px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+.tech-nav-btn { background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 12px; font-weight: 700; font-size: 13px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2); }
+.tech-nav-btn:hover:not(:disabled) { background: #2563eb; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+.tech-nav-btn:disabled { background: #94a3b8; cursor: not-allowed; transform: none; box-shadow: none; }
+.tech-nav-btn.finish { background: #3b82f6; }
+.tech-nav-btn.finish:hover:not(:disabled) { background: #2563eb; }
+.tech-btn-danger { color: #dc2626; background: #fef2f2; border: 1px solid #fee2e2; padding: 8px 16px; border-radius: 10px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }

@@ -1,0 +1,365 @@
+/* JobScout — Session History Page */
+
+.histPage {
+  background: #f5f9ff;
+  min-height: 100vh;
+  padding: 28px 0 40px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.histContainer {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.histKicker {
+  font-size: 12px;
+  font-weight: 900;
+  color: #2563eb;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.histTitle {
+  font-size: 34px;
+  line-height: 1.15;
+  margin: 0;
+  color: #0f172a;
+}
+
+.histSub {
+  margin: 10px 0 0;
+  color: #475569;
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.histHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+/* Header stats */
+.histStats {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.statCard {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  padding: 10px 12px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+  min-width: 130px;
+}
+
+.statLabel {
+  font-size: 12px;
+  font-weight: 900;
+  color: #64748b;
+}
+
+.statValue {
+  font-size: 20px;
+  font-weight: 1000;
+  color: #0f172a;
+  margin-top: 4px;
+}
+
+/* Filter card */
+.filterCard {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.filterRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.filterGroup {
+  display: grid;
+  gap: 6px;
+}
+
+.filterGroup.wide {
+  grid-column: span 2;
+}
+
+@media (max-width: 980px) {
+  .filterRow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .filterGroup.wide {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 520px) {
+  .filterRow {
+    grid-template-columns: 1fr;
+  }
+  .filterGroup.wide {
+    grid-column: auto;
+  }
+}
+
+.filterLabel {
+  font-size: 12px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.input {
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 800;
+  font-size: 13px;
+  outline: none;
+  background: #fff;
+  color: #0f172a;
+}
+
+.input:focus {
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+.scoreGroup {
+  grid-column: span 2;
+}
+
+@media (max-width: 980px) {
+  .scoreGroup {
+    grid-column: auto;
+  }
+}
+
+.scoreRow {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.scorePill {
+  font-size: 12px;
+  font-weight: 900;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.10);
+  color: #1d4ed8;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.scorePill.subtle {
+  background: rgba(15, 23, 42, 0.06);
+  color: #334155;
+}
+
+.filterActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.resultCount {
+  font-weight: 900;
+  color: #334155;
+}
+
+/* Table card */
+.tableCard {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1.3fr 1.2fr 0.9fr 0.6fr 0.7fr 0.8fr 0.7fr;
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(37, 99, 235, 0.06);
+  color: #0f172a;
+  font-weight: 1000;
+  font-size: 12px;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 1.3fr 1.2fr 0.9fr 0.6fr 0.7fr 0.8fr 0.7fr;
+  gap: 10px;
+  padding: 12px 14px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  align-items: center;
+}
+
+.cell {
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.strong {
+  font-weight: 900;
+}
+
+.mutedSmall {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 900;
+}
+
+/* Pills / badges */
+.typePill {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(2, 132, 199, 0.08);
+  color: #0369a1;
+}
+
+.scoreBadge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 1000;
+  padding: 6px 10px;
+  border-radius: 999px;
+  text-align: center;
+  min-width: 46px;
+}
+
+.badgeGood {
+  background: rgba(16, 185, 129, 0.14);
+  color: #047857;
+}
+
+.badgeBlue {
+  background: rgba(37, 99, 235, 0.12);
+  color: #1d4ed8;
+}
+
+.badgeWarn {
+  background: rgba(245, 158, 11, 0.16);
+  color: #b45309;
+}
+
+.badgeBad {
+  background: rgba(239, 68, 68, 0.12);
+  color: #b91c1c;
+}
+
+.emptyState {
+  padding: 16px;
+  color: #475569;
+  font-weight: 900;
+}
+
+/* Mobile cards */
+.cardGridMobile {
+  display: none;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.mobileCard {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+  padding: 14px;
+}
+
+.mobileTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.mobileMid {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.rowLine {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+@media (max-width: 860px) {
+  .tableCard {
+    display: none;
+  }
+  .cardGridMobile {
+    display: grid;
+  }
+}
+
+/* Buttons */
+.btnPrimary,
+.btnGhost {
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 1000;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.06s ease, background 0.15s ease, border 0.15s ease;
+}
+
+.btnPrimary {
+  background: #2563eb;
+  color: #fff;
+  border-color: rgba(37, 99, 235, 0.35);
+}
+
+.btnPrimary:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.btnPrimary.full {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.btnGhost {
+  background: #fff;
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.15);
+}
+
+.btnGhost:hover {
+  background: rgba(15, 23, 42, 0.04);
+}

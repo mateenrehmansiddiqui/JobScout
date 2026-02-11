@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Sparkles, Timer, Flag, Speaker, Wand2,
-  ChevronLeft, ChevronRight, MessageSquareText, Activity, Video
+  Timer, Flag,
+  ChevronLeft, ChevronRight, Video
 } from 'lucide-react';
 import './ActiveSessionHR.css';
 
@@ -22,33 +22,33 @@ export default function ActiveSessionHR() {
   const navigate = useNavigate();
   const [qIndex, setQIndex] = useState(0);
 
-  // 15 min timer default
-  const [timeLeft, setTimeLeft] = useState(900);
+  // Count up timer (elapsed time)
+  const [elapsedTime, setElapsedTime] = useState(0);
 
   const [answers, setAnswers] = useState({});
   const [showHelp, setShowHelp] = useState(true);
+  const [showTextBox, setShowTextBox] = useState(false);
 
   // Track session start time for duration calculation
   const [startedAt] = useState(() => Date.now());
 
   useEffect(() => {
-    const id = setInterval(() => setTimeLeft((t) => (t > 0 ? t - 1 : 0)), 1000);
+    const id = setInterval(() => setElapsedTime((t) => t + 1), 1000);
     return () => clearInterval(id);
   }, []);
 
-  const q = HR_DATA.questions[qIndex];
-  const mm = String(Math.floor(timeLeft / 60)).padStart(2, '0');
-  const ss = String(timeLeft % 60).padStart(2, '0');
+  const mm = String(Math.floor(elapsedTime / 60)).padStart(2, '0');
+  const ss = String(elapsedTime % 60).padStart(2, '0');
 
+  const q = HR_DATA.questions[qIndex];
   const progress = ((qIndex + 1) / HR_DATA.totalQuestions) * 100;
 
   // ✅ compute duration nicely
   const durationText = useMemo(() => {
-    const elapsedSec = Math.max(0, Math.floor((Date.now() - startedAt) / 1000));
-    const m = Math.floor(elapsedSec / 60);
-    const s = elapsedSec % 60;
+    const m = Math.floor(elapsedTime / 60);
+    const s = elapsedTime % 60;
     return `${m}m ${String(s).padStart(2, "0")}s`;
-  }, [startedAt, qIndex, timeLeft]);
+  }, [elapsedTime]);
 
   // ✅ simple scoring placeholder (for now) based on answered questions
   const computedScore = useMemo(() => {
@@ -93,14 +93,14 @@ export default function ActiveSessionHR() {
     });
   };
 
-  // ✅ End early (with confirm)
+  // End early (with confirm)
   const endSessionEarly = () => {
-    const ok = window.confirm("End interview session now? Your progress will be saved in this session’s results.");
+    const ok = window.confirm("End HR interview session now? Your progress will be saved in this session's results.");
     if (!ok) return;
     goToResults();
   };
 
-  // ✅ Next / Finish logic
+  // Next / Finish logic
   const nextOrFinish = () => {
     if (qIndex === HR_DATA.totalQuestions - 1) {
       // last question -> results
@@ -111,108 +111,90 @@ export default function ActiveSessionHR() {
   };
 
   return (
-    <div className="as-page">
-      <div className="as-bg-blobs"><div className="blob-1" /><div className="blob-2" /></div>
+    <div className="hr-page">
+      <div className="hr-bg-blobs"><div className="blob-1" /><div className="blob-2" /></div>
 
-      <header className="as-topbar">
-        <div className="as-topbar-left">
-          <div className="as-pill"><MessageSquareText size={14}/> HR Interview</div>
-          <div className="as-meta">
-            <span className="as-meta-title">{HR_DATA.role}</span>
-            <span className="as-meta-sub">Question {qIndex + 1} of {HR_DATA.totalQuestions}</span>
-          </div>
+      <header className="hr-topbar">
+        <div className="hr-topbar-left">
+          <div className="hr-logo">JobScout</div>
         </div>
 
-        <div className="as-topbar-right">
-          <div className="as-timer"><Timer size={16}/> {mm}:{ss}</div>
+        <div className="hr-topbar-center">
+          <div className="hr-pill">HR Interview - {HR_DATA.role}</div>
+        </div>
+
+        <div className="hr-topbar-right">
+          <div className="hr-timer"><Timer size={16}/> {mm}:{ss}</div>
 
           {/* ✅ changed: End now goes to results (not dashboard) */}
-          <button className="as-btn-danger" onClick={endSessionEarly}>
+          <button className="hr-btn-danger" onClick={endSessionEarly}>
             <Flag size={16}/> End
           </button>
         </div>
       </header>
 
-      <main className="as-main-layout">
-        <section className="as-content-card">
-          <div className="as-q-header">
-            <div className="as-interviewer">
-              <div className="as-avatar">{HR_DATA.persona.initials}</div>
-              <div>
-                <div className="as-name">{HR_DATA.persona.name}</div>
-                <div className="as-status"><span></span> Active Now</div>
-              </div>
+      <main className="hr-main-layout">
+        <section className="hr-video-section">
+          <div className="hr-video-grid">
+            <div className="hr-video-item">
+              <h3>Ayesha (HR)</h3>
+              <div className="hr-camera-mock hr-interviewer-video">Camera Active</div>
             </div>
-
-            <div className="as-q-actions">
-              <button className="as-btn-icon" title="Read aloud">
-                <Speaker size={18}/>
-              </button>
-              <button className="as-btn-icon" title="Hint">
-                <Wand2 size={18}/>
-              </button>
-            </div>
-          </div>
-
-          <div className="as-question-box">
-            <h2>{q.title}</h2>
-            <p>{q.text}</p>
-            <div className="as-hint-pill"><Sparkles size={14}/> {q.hint}</div>
-          </div>
-
-          <div className="as-editor-wrap">
-            <textarea
-              className="as-textarea"
-              placeholder="Structure your answer using Situation, Task, Action, Result..."
-              value={answers[qIndex] || ''}
-              onChange={(e) => setAnswers({ ...answers, [qIndex]: e.target.value })}
-            />
-            <div className="as-editor-footer">
-              <span>{answers[qIndex]?.split(' ').filter(Boolean).length || 0} Words</span>
-
-              {/* Save Answer stays same */}
-              <button
-                className="as-btn-primary"
-                onClick={() => setQIndex(i => Math.min(i + 1, HR_DATA.totalQuestions - 1))}
-              >
-                Save Answer
-              </button>
+            <div className="hr-video-item">
+              <h3>Self Preview</h3>
+              <div className="hr-camera-mock">Camera Active</div>
             </div>
           </div>
         </section>
 
-        <aside className="as-sidebar">
-          <div className="as-widget">
-            <h3><Video size={16}/> Self Preview</h3>
-            <div className="as-camera-mock">Camera Active</div>
+        <section className="hr-content-card">
+          <div className="hr-question-box">
+            <div className="hr-question-bubble">Question {qIndex + 1}</div>
+            <p>{q.text}</p>
+            
+            {showTextBox ? (
+              <div className="hr-text-box-container">
+                <textarea
+                  className="hr-textarea"
+                  placeholder="Type your response here..."
+                  value={answers[qIndex] || ''}
+                  onChange={(e) => setAnswers({ ...answers, [qIndex]: e.target.value })}
+                />
+                <div className="hr-text-box-footer">
+                  <span>{answers[qIndex]?.split(' ').filter(Boolean).length || 0} Words</span>
+                  <button className="hr-nav-btn" onClick={() => setShowTextBox(false)}>
+                    Close Text Box
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="hr-mic-fallback">
+                <button className="hr-mic-btn" onClick={() => setShowTextBox(true)}>
+                  Mic not working? Click here to open a text box.
+                </button>
+              </div>
+            )}
           </div>
-
-          <div className="as-widget">
-            <h3><Activity size={16}/> STAR Meter</h3>
-            <div className="as-meter-track">
-              <div className="as-meter-fill" style={{ width: '65%' }} />
-            </div>
-            <p className="as-small-text">Try adding more "Result" keywords.</p>
-
-            {/* ✅ useful mini summary for session */}
-            <div className="as-small-text" style={{ marginTop: 10 }}>
-              <strong>Estimated Score:</strong> {computedScore}/100 · <strong>Duration:</strong> {durationText}
-            </div>
-          </div>
-        </aside>
+        </section>
       </main>
 
-      <footer className="as-bottom-nav">
-        <button disabled={qIndex === 0} onClick={() => setQIndex(qIndex - 1)}>
+      <footer className="hr-bottom-nav">
+        <button 
+          className="hr-nav-btn" 
+          disabled={qIndex === 0} 
+          onClick={() => setQIndex(qIndex - 1)}
+        >
           <ChevronLeft /> Prev
         </button>
 
-        <div className="as-progress-track">
-          <div className="as-progress-fill" style={{ width: `${progress}%` }} />
+        <div className="hr-progress-track">
+          <div className="hr-progress-fill" style={{ width: `${progress}%` }} />
         </div>
 
-        {/* ✅ changed: finish goes to results */}
-        <button onClick={nextOrFinish}>
+        <button 
+          className={`hr-nav-btn ${qIndex === HR_DATA.totalQuestions - 1 ? 'finish' : ''}`}
+          onClick={nextOrFinish}
+        >
           {qIndex === HR_DATA.totalQuestions - 1 ? 'Finish' : 'Next'} <ChevronRight />
         </button>
       </footer>
