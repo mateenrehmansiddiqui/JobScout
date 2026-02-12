@@ -315,7 +315,7 @@
 .card-header h3 {
   font-size: 28px;
   font-weight: 800;
-  color: #000000;
+  color: var(--text-white);
 }
 
 .card-header svg {
@@ -336,7 +336,7 @@
 }
 
 .description {
-  color: var(--text-dark);
+  color: var(--text-white);
   margin-bottom: 24px;
   font-size: 18px;
   line-height: 1.6;
@@ -345,7 +345,7 @@
 .question-text {
   font-size: 22px;
   font-weight: 500;
-  color: var(--text-dark);
+  color: var(--text-white);
   margin-bottom: 32px;
   line-height: 1.6;
   font-style: italic;
@@ -393,7 +393,7 @@
 }
 
 .ai-feedback p {
-  color: var(--text-dark);
+  color: var(--text-white);
   margin-bottom: 20px;
   font-size: 16px;
   line-height: 1.6;
@@ -416,7 +416,7 @@
 }
 
 .message {
-  color: var(--text-dark);
+  color: var(--text-white);
   margin-bottom: 32px;
   font-size: 18px;
   line-height: 1.6;
@@ -498,7 +498,7 @@
 
 .ranking-text {
   text-align: center;
-  color: var(--text-dark);
+  color: var(--text-white);
   margin-bottom: 24px;
   font-size: 18px;
   line-height: 1.6;
@@ -544,7 +544,7 @@
 .steps-list li {
   padding: 16px 0;
   border-bottom: 1px solid var(--border-color);
-  color: var(--text-dark);
+  color: var(--text-white);
   font-size: 18px;
   display: flex;
   align-items: center;
