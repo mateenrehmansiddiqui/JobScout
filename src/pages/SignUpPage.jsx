@@ -107,7 +107,6 @@ const SignUpPage = () => {
         <div className="signup-left">
           <div className="signup-branding">
             <div className="brand-logo" onClick={() => navigate('/')}>
-              <span className="logo-icon">🎯</span>
               <span className="logo-text">JobScout</span>
             </div>
             <h1 className="brand-title">Start Your Interview Preparation Journey</h1>

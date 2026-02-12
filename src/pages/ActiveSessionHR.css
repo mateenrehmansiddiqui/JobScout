@@ -7,7 +7,7 @@
 .hr-topbar-center { flex: 1; display: flex; justify-content: center; }
 .hr-topbar-right { flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 15px; }
 .hr-logo { font-size: 24px; font-weight: 800; color: #2563eb; }
-.hr-pill { background: #e0f2fe; color: #0369a1; padding: 8px 20px; border-radius: 20px; font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+.hr-pill { background: #e0f2fe; color: #0369a1; padding: 10px 24px; border-radius: 20px; font-weight: 700; font-size: 18px; display: flex; align-items: center; gap: 6px; }
 .as-meta { display: flex; flex-direction: column; }
 .as-meta-title { font-weight: 800; font-size: 15px; }
 .as-meta-sub { font-size: 12px; color: #64748b; }
@@ -43,9 +43,11 @@
 .hr-camera-mock { height: 200px; background: #1e293b; border-radius: 12px; display: grid; place-items: center; color: #475569; font-size: 12px; }
 .hr-video-section { background: white; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; padding: 15px; width: 380px; flex-shrink: 0; margin: 0 0 20px 0; max-height: calc(100vh - 179px); overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
 .hr-video-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-.hr-video-item h3 { font-size: 13px; font-weight: 700; margin-bottom: 3px; text-align: center; color: #374151; }
-.hr-video-item .hr-camera-mock { height: 200px; font-size: 13px; border-radius: 16px; }
-.hr-interviewer-video { background: linear-gradient(135deg, #2563eb, #60a5fa); color: white; }
+.hr-video-item h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; text-align: center; color: #374151; transition: all 0.3s ease; }
+.hr-video-item .hr-camera-mock { height: 200px; font-size: 13px; border-radius: 16px; transition: all 0.3s ease; }
+.hr-interviewer-video { background: linear-gradient(135deg, #2563eb, #60a5fa); color: white; box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3); }
+.hr-video-item:hover h3 { color: #2563eb; transform: translateY(-2px); }
+.hr-video-item:hover .hr-camera-mock { transform: scale(1.02); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }
 
 .hr-bottom-nav { position: fixed; bottom: 0; width: 100%; height: 80px; background: rgba(255,255,255,0.95); backdrop-filter: blur(15px); display: flex; align-items: center; justify-content: space-between; padding: 0 50px; border-top: 1px solid #f1f5f9; }
 .hr-progress-track { width: 300px; height: 8px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }

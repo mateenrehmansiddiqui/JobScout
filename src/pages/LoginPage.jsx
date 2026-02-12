@@ -51,7 +51,6 @@ const LoginPage = () => {
         <div className="login-left">
           <div className="login-branding">
             <div className="brand-logo" onClick={() => navigate('/')}>
-              <span className="logo-icon">🎯</span>
               <span className="logo-text">JobScout</span>
             </div>
             <h1 className="brand-title">Welcome Back to JobScout</h1>

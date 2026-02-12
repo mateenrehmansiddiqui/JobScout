@@ -137,15 +137,15 @@ export default function ActiveSessionPanel() {
         <section className="as-video-section">
           <div className="as-video-grid">
             <div className="as-video-item">
-              <h3>Bilal Hassan (Tech Lead)</h3>
+              <h3>David Miller (Tech Lead)</h3>
               <div className="as-camera-mock as-interviewer-video">Camera Active</div>
             </div>
             <div className="as-video-item">
-              <h3>Anum Malik (Product Manager)</h3>
+              <h3>Sarah Johnson (Product Manager)</h3>
               <div className="as-camera-mock as-interviewer-video">Camera Active</div>
             </div>
             <div className="as-video-item">
-              <h3>Maryam Aftab (HR Director)</h3>
+              <h3>Jennifer Davis (HR Director)</h3>
               <div className="as-camera-mock as-interviewer-video">Camera Active</div>
             </div>
             <div className="as-video-item">

@@ -7,7 +7,7 @@ import {
 import './ActiveSessionTechnical.css';
 
 const TECH_DATA = {
-  persona: { name: 'Hamid Ali (Tech Lead)', subtitle: 'Senior Engineer', initials: 'SC' },
+  persona: { name: 'Michael Chen (Tech Lead)', subtitle: 'Senior Engineer', initials: 'MC' },
   role: 'Software Engineer',
   totalQuestions: 4,
   questions: [
@@ -135,7 +135,7 @@ export default function ActiveSessionTechnical() {
         <section className="tech-video-section">
           <div className="tech-video-grid">
             <div className="tech-video-item">
-              <h3>{TECH_DATA.persona.name}</h3>
+              <h3>Michael Chen (Tech Lead)</h3>
               <div className="tech-camera-mock tech-interviewer-video">Camera Active</div>
             </div>
             <div className="tech-video-item">

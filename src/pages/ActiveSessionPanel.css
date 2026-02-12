@@ -7,7 +7,7 @@
 .as-topbar-center { flex: 1; display: flex; justify-content: center; }
 .as-topbar-right { flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 15px; }
 .as-logo { font-size: 24px; font-weight: 800; color: #2563eb; }
-.as-pill { background: #e0f2fe; color: #0369a1; padding: 8px 20px; border-radius: 20px; font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+.as-pill { background: #e0f2fe; color: #0369a1; padding: 10px 24px; border-radius: 20px; font-weight: 700; font-size: 18px; display: flex; align-items: center; gap: 6px; }
 .as-meta { display: flex; flex-direction: column; }
 .as-meta-title { font-weight: 800; font-size: 15px; }
 .as-meta-sub { font-size: 12px; color: #64748b; }
@@ -43,9 +43,11 @@
 .as-camera-mock { height: 120px; background: #1e293b; border-radius: 12px; display: grid; place-items: center; color: #475569; font-size: 12px; }
 .as-video-section { background: white; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; padding: 10px; }
 .as-video-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-.as-video-item h3 { font-size: 13px; font-weight: 700; margin-bottom: 3px; text-align: center; color: #374151; }
-.as-video-item .as-camera-mock { height: 120px; font-size: 13px; border-radius: 16px; }
-.as-interviewer-video { background: linear-gradient(135deg, #2563eb, #60a5fa); color: white; }
+.as-video-item h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; text-align: center; color: #374151; transition: all 0.3s ease; }
+.as-video-item .as-camera-mock { height: 120px; font-size: 13px; border-radius: 16px; transition: all 0.3s ease; }
+.as-interviewer-video { background: linear-gradient(135deg, #2563eb, #60a5fa); color: white; box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3); }
+.as-video-item:hover h3 { color: #2563eb; transform: translateY(-2px); }
+.as-video-item:hover .as-camera-mock { transform: scale(1.02); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }
 
 .as-bottom-nav { position: fixed; bottom: 0; width: 100%; height: 80px; background: rgba(255,255,255,0.95); backdrop-filter: blur(15px); display: flex; align-items: center; justify-content: space-between; padding: 0 50px; border-top: 1px solid #f1f5f9; }
 .as-progress-track { width: 300px; height: 8px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }

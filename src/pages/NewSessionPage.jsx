@@ -47,19 +47,7 @@ const NewSessionPage = () => {
 
   return (
     <div className="new-session-page-wrapper">
-      {isLaunching && (
-        <div className="launch-overlay anim-fade">
-          <div className="success-card">
-            <div className="check-circle" style={{background: '#10b981', borderRadius: '50%', padding: '10px'}}>
-              <Check size={48} color="white" strokeWidth={3} />
-            </div>
-            <h2>Preparing Interview...</h2>
-            <p>Setting up your AI environment</p>
-          </div>
-        </div>
-      )}
-
-      <div className={`dashboard-container ${isLaunching ? 'blur-content' : ''}`}>
+      <div className="dashboard-container">
         <header className="dashboard-header">
           <h1>Start New Session</h1>
           <button onClick={() => navigate('/dashboard')} className="text-btn">
@@ -165,7 +153,7 @@ const NewSessionPage = () => {
                 </div>
               </div>
               <div className="input-group" style={{marginTop:'20px'}}>
-                <label>Number of Questions: <span className="question-count-badge">{numQuestions}</span></label>
+                <label>Number of Questions:<span className="question-count-badge">{numQuestions}</span></label>
                 <input 
                   type="range" 
                   min="1" 
@@ -175,7 +163,7 @@ const NewSessionPage = () => {
                   className="modern-range"
                   style={{width:'100%', marginTop:'10px'}}
                 />
-                <div style={{display:'flex', justifyContent:'space-between', fontSize:'12px', color:'#64748b', marginTop:'5px'}}>
+                <div style={{display:'flex', justifyContent:'space-between', fontSize:'14px', color:'#3b82f6', marginTop:'5px', fontWeight:'700'}}>
                   <span>1</span>
                   <span>20</span>
                 </div>

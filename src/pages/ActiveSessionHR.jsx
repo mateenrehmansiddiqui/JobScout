@@ -7,7 +7,7 @@ import {
 import './ActiveSessionHR.css';
 
 const HR_DATA = {
-  persona: { name: 'Ayesha (HR)', subtitle: 'Behavioral Specialist', initials: 'AH' },
+  persona: { name: 'Emily Thompson (HR)', subtitle: 'Behavioral Specialist', initials: 'ET' },
   role: 'Graduate Software Engineer',
   totalQuestions: 4,
   questions: [
@@ -137,7 +137,7 @@ export default function ActiveSessionHR() {
         <section className="hr-video-section">
           <div className="hr-video-grid">
             <div className="hr-video-item">
-              <h3>Ayesha (HR)</h3>
+              <h3>Emily Thompson (HR)</h3>
               <div className="hr-camera-mock hr-interviewer-video">Camera Active</div>
             </div>
             <div className="hr-video-item">
